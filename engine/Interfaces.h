@@ -13,13 +13,15 @@
 
 class IKeyboardHandler {
 public:
-//    virtual bool VOnKeyDown(const BYTE c) = 0;
+    virtual void VOnKeyDown(const int keyCode) = 0;
 //
 //    virtual bool VOnKeyUp(const BYTE c) = 0;
 };
 
 class IMouseHandler {
 public:
+    virtual bool VOnMouseMove(const int dx, const int dy) = 0;
+
 //    virtual bool VOnMouseMove(const CPoint &mousePos) = 0;
 //
 //    virtual bool VOnLButtonDown(const CPoint &mousePos) = 0;
@@ -35,8 +37,6 @@ typedef unsigned int ActorId;
 struct ActorParams;
 
 class IActor {
-    friend class IGame;
-
 public:
     virtual void VSetID(ActorId id) = 0;
 
@@ -62,8 +62,6 @@ public:
     virtual void onUpdate(double elapsedTime) = 0;
 
     virtual bool VLoadGame() = 0;
-
-    virtual void VBuildInitialScene() = 0;
 };
 
 typedef unsigned int GameViewId;
@@ -72,9 +70,9 @@ class IGameView {
 public:
     virtual void onUpdate(double elapsedTime) = 0;
 
-    virtual void onRender(const Time &time) = 0;
+    virtual void onRender(double elapsedTime) = 0;
 
-    virtual GameViewId VGetId() const=0;
+    virtual GameViewId VGetId() const = 0;
 
     virtual void VOnAttach(GameViewId vid, optional<ActorId> aid) = 0;
 
@@ -88,7 +86,7 @@ public:
 
     virtual void onUpdate(double elapsedTime) = 0;
 
-    virtual void onRender(const Time &time) = 0;
+    virtual void onRender(double elapsedTime) = 0;
 
     virtual bool isVisible() const = 0;
 
@@ -107,11 +105,7 @@ class ISceneNode {
 public:
     virtual const SceneNodeProperties *const VGet() const = 0;
 
-    virtual void VPreRender(Scene *pScene) = 0;
-
     virtual void VRender(Scene *pScene) = 0;
-
-    virtual void VPostRender(Scene *pScene) = 0;
 
     virtual void VOnUpdate(Scene *, double elapsedTime) = 0;
 
@@ -122,6 +116,8 @@ public:
     virtual void VRenderChildren(Scene *pScene) = 0;
 
     virtual bool VIsVisible(Scene *pScene) const = 0;
+
+    virtual void VTranslate(int posX, int posY) = 0;
 
     virtual ~ISceneNode() { };
 };

@@ -18,10 +18,21 @@ protected:
     optional<ActorId> m_ActorId;
     std::string m_Name;
 
+    int posX;
+    int posY;
+
 public:
     optional<ActorId> const &ActorId() const;
 
     const char *Name() const;
+
+    int getPosX() const {
+        return posX;
+    }
+
+    int getPosY() const {
+        return posY;
+    }
 };
 
 

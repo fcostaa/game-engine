@@ -8,6 +8,7 @@ SceneNode::SceneNode(optional<ActorId> actorId, std::string name) {
     m_pParent = NULL;
     m_Props.m_ActorId = actorId;
     m_Props.m_Name = name;
+    VTranslate(0, 0);
 }
 
 SceneNode::~SceneNode() {
@@ -29,14 +30,6 @@ void SceneNode::VOnUpdate(Scene *scene, double elapsedTime) {
     }
 }
 
-void SceneNode::VPreRender(Scene *pScene) {
-
-}
-
-void SceneNode::VPostRender(Scene *pScene) {
-
-}
-
 void SceneNode::VRender(Scene *pScene) {
 
 }
@@ -50,19 +43,12 @@ void SceneNode::VRenderChildren(Scene *pScene) {
     SceneNodeList::iterator i = m_Children.begin();
     SceneNodeList::iterator end = m_Children.end();
 
-    while (i != end) {
-        (*i)->VPreRender(pScene);
-
+    for (; i != end; ++i) {
         if ((*i)->VIsVisible(pScene)) {
             (*i)->VRender(pScene);
         }
-
-        (*i)->VPostRender(pScene);
-
-        i++;
     }
 }
-
 
 bool SceneNode::VAddChild(boost::shared_ptr<ISceneNode> kid) {
     m_Children.push_back(kid);
@@ -78,4 +64,9 @@ bool SceneNode::VRemoveChild(ActorId id) {
         }
     }
     return false;
+}
+
+void SceneNode::VTranslate(int posX, int posY) {
+    m_Props.posX = posX;
+    m_Props.posY = posY;
 }

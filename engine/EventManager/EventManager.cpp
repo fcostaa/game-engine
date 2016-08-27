@@ -3,6 +3,7 @@
 //
 
 #include "EventManager.h"
+#include <iostream>
 
 EventManager::EventManager(char const *const pName, bool setAsGlobal)
         : IEventManager(pName, setAsGlobal),
@@ -93,19 +94,6 @@ bool EventManager::VTrigger(IEventData const &inEvent) const {
     if (!VValidateType(inEvent.VGetEventType()))
         return false;
 
-//    EventListenerMap::const_iterator itWC = m_registry.find(0);
-//
-//    if (itWC != m_registry.end()) {
-//        EventListenerTable const &table = itWC->second;
-//
-//        bool processed = false;
-//
-//        for (EventListenerTable::const_iterator it2 = table.begin(),
-//                     it2End = table.end(); it2 != it2End; it2++) {
-//            (*it2)->HandleEvent(inEvent);
-//        }
-//    }
-
     EventListenerMap::const_iterator it =
             m_registry.find(inEvent.VGetEventType());
 
@@ -129,7 +117,19 @@ bool EventManager::VTrigger(IEventData const &inEvent) const {
 }
 
 bool EventManager::VQueueEvent(IEventDataPtr const &inEvent) {
-    return false;
+    if (!VValidateType(inEvent->VGetEventType()))
+        return false;
+
+    EventListenerMap::const_iterator it =
+            m_registry.find(inEvent->VGetEventType());
+
+    if (it == m_registry.end()) {
+        return false;
+    }
+
+    m_queues[m_activeQueue].push_back(inEvent);
+
+    return true;
 }
 
 bool EventManager::VThreadSafeQueueEvent(IEventDataPtr const &inEvent) {
@@ -141,6 +141,56 @@ bool EventManager::VAbortEvent(EventType const &inType, bool allOfType) {
 }
 
 bool EventManager::VTick(unsigned long maxMillis) {
+//    unsigned long curMs = GetTickCount();
+//    unsigned long maxMs =
+//            maxMillis == IEventManager::kINFINITE
+//            ? IEventManager::kINFINITE
+//            : (curMs + maxMillis );
+
+    int queueToProcess = m_activeQueue;
+
+    m_activeQueue = (m_activeQueue + 1) % kNumQueues;
+
+//    m_queues[m_activeQueue].clear();
+
+    EventListenerMap::const_iterator it;
+
+    while (m_queues[queueToProcess].size() > 0) {
+        IEventDataPtr event = m_queues[queueToProcess].front();
+
+        m_queues[queueToProcess].pop_front();
+
+        EventType const &eventType = event->VGetEventType();
+
+        EventListenerMap::const_iterator itListeners =
+                m_registry.find(eventType);
+
+        // no listerners currently for this event type, skipit
+        if (itListeners == m_registry.end())
+            continue;
+
+        std::string kEventId = itListeners->first;
+        EventListenerTable const &table = itListeners->second;
+
+        for (EventListenerTable::const_iterator
+                     it = table.begin(), end = table.end();
+             it != end; it++) {
+            if ((*it)->HandleEvent(*event)) {
+                break;
+            }
+        }
+
+//        curMs = GetTickCount();
+//
+//        if (maxMillis != IEventManager::kINFINITE) {
+//
+//            if (curMs >= maxMs) {
+//                // time ran about, abort processing loop
+//                break;
+//            }
+//        }
+    }
+
     return false;
 }
 

@@ -24,7 +24,7 @@ struct ActorParams {
 
     virtual boost::shared_ptr<IActor> VCreate(BaseGameLogic *logic);
 
-    virtual boost::shared_ptr<SceneNode> VCreateSceneNode(boost::shared_ptr<Scene> pScene);
+    virtual boost::shared_ptr<ISceneNode> VCreateSceneNode(boost::shared_ptr<Scene> pScene);
 };
 
 

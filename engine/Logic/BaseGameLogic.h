@@ -43,6 +43,11 @@ public:
 
     virtual ~BaseGameLogic();
 
+    ActorId GetNewActorID( void )
+    {
+        return ++m_LastActorId;
+    }
+
     GameViewList *getGameViewList();
 
     virtual void addGameView(boost::shared_ptr<IGameView> view, optional<ActorId> actor = optional_empty());
@@ -52,8 +57,6 @@ public:
     virtual void VAddActor(boost::shared_ptr<IActor> actor, ActorParams *p);
 
     virtual void VRemoveActor(ActorId id);
-
-    void renderDiagnostics();
 
     void changeState(GameState newState);
 

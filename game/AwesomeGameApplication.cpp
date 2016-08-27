@@ -6,8 +6,12 @@
 #include "AwesomeGameApplication.h"
 #include "AwesomeHumanView.h"
 #include "AwesomeGameLogic.h"
-#include "Events/EvtData_New_Game.h"
-#include "Events/EvtData_New_Actor.h"
+#include "../engine/EventManager/Events/EvtData_New_Actor.h"
+#include "../engine/EventManager/Events/EvtData_New_Game.h"
+#include "../engine/EventManager/Events/EvtData_Move_Actor.h"
+#include "../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
+#include "../engine/EventManager/Events/EvtData_Request_New_Actor.h"
+#include "../engine/EventManager/Events/EvtData_Mouse_Move.h"
 
 bool AwesomeGameApplication::loadGame() {
     return mGameLogic->VLoadGame();
@@ -32,11 +36,10 @@ bool AwesomeGameApplication::RegisterBaseGameEvents() {
     if (isSuperRegister) {
         mEventManager->RegisterEvent<EvtData_New_Game>(EvtData_New_Game::sk_EventType);
         mEventManager->RegisterEvent<EvtData_New_Actor>(EvtData_New_Actor::sk_EventType);
+        mEventManager->RegisterEvent<EvtData_New_Actor>(EvtData_Keyboard_key_Down::sk_EventType);
+        mEventManager->RegisterEvent<EvtData_New_Actor>(EvtData_Mouse_Move::sk_EventType);
+        mEventManager->RegisterEvent<EvtData_Request_New_Actor>(EvtData_Request_New_Actor::sk_EventType);
+        mEventManager->RegisterEvent<EvtData_New_Actor>(EvtData_Move_Actor::sk_EventType);
     }
     return isSuperRegister;
 }
-
-//void AwesomeGameApplication::RegisterGameSpecificEvents() {
-//    mEventManager->RegisterEvent<EvtData_New_Game>(EvtData_New_Game::sk_EventType);
-////    mEventManager->RegisterEvent< NewActorEventData >( NewActorEventData::sk_EventType );
-//}

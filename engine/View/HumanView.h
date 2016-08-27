@@ -15,25 +15,27 @@ class HumanView : public IGameView {
 protected:
     ProcessManager *mProcessManager;
 
-    boost::shared_ptr<IMouseHandler> m_MouseHandler;
-    boost::shared_ptr<IKeyboardHandler> m_KeyboardHandler;
-
     ScreenElementList m_ScreenElements;
 
-    GameViewId		m_ViewId;
+    GameViewId m_ViewId;
     optional<ActorId> m_ActorId;
 
 public:
+    boost::shared_ptr<IMouseHandler> m_MouseHandler;
+    boost::shared_ptr<IKeyboardHandler> m_KeyboardHandler;
+
     HumanView();
 
     virtual ~HumanView();
 
     virtual void onUpdate(double elapsedTime);
 
-    virtual void onRender(const Time &time);
+    virtual void onRender(double elapsedTime);
 
     virtual void VOnAttach(GameViewId vid, optional<ActorId> aid);
+
     virtual void VPushElement(boost::shared_ptr<IScreenElement> pScreen);
+
     virtual void VPopElement(boost::shared_ptr<IScreenElement> pElement);
 
     virtual GameViewId VGetId() const;

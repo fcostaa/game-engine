@@ -14,7 +14,7 @@ typedef std::map<ActorId, boost::shared_ptr<ISceneNode> > SceneActorMap;
 
 class Scene {
 protected:
-    boost::shared_ptr<SceneNode> m_Root;
+    boost::shared_ptr<ISceneNode> m_Root;
     SceneActorMap m_ActorMap;
 
 public:
@@ -24,7 +24,9 @@ public:
 
     void OnRender();
 
-    void OnUpdate(const int deltaMilliseconds);
+    void OnUpdate(const double elapsedTime);
+
+    boost::shared_ptr<ISceneNode> FindActor(ActorId id);
 
     bool AddChild(optional<ActorId> id, boost::shared_ptr<ISceneNode> kid);
 

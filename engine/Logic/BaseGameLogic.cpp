@@ -4,10 +4,10 @@
 
 #include "BaseGameLogic.h"
 #include "../Actor/Base/ActorParams.h"
-#include "../../game/Events/EvtData_New_Game.h"
+#include "../EventManager/Events/EvtData_New_Game.h"
 
 BaseGameLogic::BaseGameLogic() :
-        mGameViews(0) {
+        mGameViews(0), m_LastActorId(0) {
 
     mGameViews = NEW GameViewList();
     mProcessManager = NEW ProcessManager();
@@ -73,13 +73,9 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
 
 }
 
-void BaseGameLogic::renderDiagnostics() {
-}
-
 void BaseGameLogic::changeState(GameState newState) {
     mState = newState;
 }
-
 
 void BaseGameLogic::VAddActor(boost::shared_ptr<IActor> actor, ActorParams *p) {
     optional<ActorId> destActorID = p->m_Id;

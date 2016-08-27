@@ -17,5 +17,3 @@ const EventType &EvtData_New_Game::VGetEventType() const {
 IEventDataPtr EvtData_New_Game::VCopy() const {
     return IEventDataPtr(NEW EvtData_New_Game());
 }
-
-

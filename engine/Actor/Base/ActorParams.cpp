@@ -20,6 +20,6 @@ boost::shared_ptr<IActor> ActorParams::VCreate(BaseGameLogic *logic) {
     return boost::shared_ptr<IActor>();
 }
 
-boost::shared_ptr<SceneNode> ActorParams::VCreateSceneNode(boost::shared_ptr<Scene> pScene) {
+boost::shared_ptr<ISceneNode> ActorParams::VCreateSceneNode(boost::shared_ptr<Scene> pScene) {
     return boost::shared_ptr<SceneNode>();
 }

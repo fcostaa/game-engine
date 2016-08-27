@@ -27,11 +27,7 @@ public:
 
     virtual ~SceneNode();
 
-    virtual void VPreRender(Scene *pScene);
-
     virtual void VRender(Scene *pScene);
-
-    virtual void VPostRender(Scene *pScene);
 
     virtual void VOnUpdate(Scene *scene, double elapsedTime);
 
@@ -44,6 +40,8 @@ public:
     virtual bool VRemoveChild(ActorId id);
 
     virtual const SceneNodeProperties *const VGet() const;
+
+    virtual void VTranslate(int posX, int posY);
 };
 
 

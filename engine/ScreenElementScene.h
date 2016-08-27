@@ -16,7 +16,7 @@ public:
 private:
     virtual void onUpdate(double elapsedTime);
 
-    virtual void onRender(const Time &time);
+    virtual void onRender(double elapsedTime);
 
     virtual bool isVisible() const;
 

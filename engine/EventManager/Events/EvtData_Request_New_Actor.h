@@ -8,13 +8,15 @@
 #include "BaseEventData.h"
 #include "../../Actor/Base/ActorParams.h"
 
-struct NewActorEventData : public BaseEventData {
+struct EvtData_Request_New_Actor : public BaseEventData {
+
+    static const EventType sk_EventType;
 
     ActorParams *m_pActorParams;
 
-    explicit NewActorEventData(const ActorParams *pCreateParams);
+    explicit EvtData_Request_New_Actor(const ActorParams *pCreateParams);
 
-    virtual ~NewActorEventData();
+    virtual ~EvtData_Request_New_Actor();
 
     virtual IEventDataPtr VCopy() const;
 

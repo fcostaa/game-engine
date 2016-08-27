@@ -8,9 +8,9 @@ const EventType EvtData_New_Actor::sk_EventType("new_actor");
 
 EvtData_New_Actor::EvtData_New_Actor(ActorId id, ActorParams *pCreateParams) {
     m_id = id;
-//    m_pActorParams = reinterpret_cast<ActorParams *>(NEW char[pCreateParams->m_Size]);
-//    memcpy(m_pActorParams, pCreateParams, pCreateParams->m_Size);
-//    m_pActorParams->m_Id = id;
+    m_pActorParams = reinterpret_cast<ActorParams *>(NEW char[pCreateParams->m_Size]);
+    memcpy(m_pActorParams, pCreateParams, pCreateParams->m_Size);
+    m_pActorParams->m_Id = id;
 }
 
 

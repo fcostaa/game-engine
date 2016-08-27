@@ -25,11 +25,11 @@ void HumanView::onUpdate(double elapsedTime) {
     }
 }
 
-void HumanView::onRender(const Time &time) {
+void HumanView::onRender(double elapsedTime) {
 
     for (ScreenElementList::iterator i = m_ScreenElements.begin(); i != m_ScreenElements.end(); ++i) {
         if ((*i)->isVisible()) {
-            (*i)->onRender(time);
+            (*i)->onRender(elapsedTime);
         }
     }
 }

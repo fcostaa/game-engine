@@ -13,7 +13,7 @@ struct SpriteObjectParams : public ActorParams {
 
     virtual boost::shared_ptr<IActor> VCreate(BaseGameLogic *logic) override;
 
-    virtual boost::shared_ptr<SceneNode> VCreateSceneNode(boost::shared_ptr<Scene> pScene) override;
+    virtual boost::shared_ptr<ISceneNode> VCreateSceneNode(boost::shared_ptr<Scene> pScene) override;
 };
 
 

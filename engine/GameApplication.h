@@ -25,10 +25,11 @@ class GameApplication {
 
 private:
     void cleanUp();
+
 protected:
     int mInstanceWindow;
     bool mIsRunning;
-    bool mQuitting;
+    bool mIsQuitting;
 
     BaseGameLogic *mGameLogic;
     EventManager *mEventManager;
@@ -43,7 +44,7 @@ public:
 
     void run();
 
-    void onRender(Time &time);
+    void onRender(double elapsedTime);
 
     void onUpdate(double elapsedTime);
 
@@ -68,6 +69,7 @@ public:
 
     virtual bool RegisterBaseGameEvents();
 
+    void handleEvent(ALLEGRO_EVENT event);
 };
 
 extern GameApplication *gameApplication;

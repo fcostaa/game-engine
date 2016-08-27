@@ -3,14 +3,17 @@
 //
 
 #include "GameApplication.h"
+#include "EventManager/Events/EvtData_Keyboard_key_Down.h"
+#include "EventManager/Events/EvtData_Mouse_Move.h"
 
 GameApplication *gameApplication = NULL;
 ALLEGRO_DISPLAY *window = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-//const int FPS = 60;
+ALLEGRO_TIMER *timer = NULL;
+const int FPS = 60;
 
 GameApplication::GameApplication() :
-        mInstanceWindow(0), mIsRunning(false), mQuitting(false), mGameLogic(0) {
+        mInstanceWindow(0), mIsRunning(false), mIsQuitting(false), mGameLogic(NULL) {
     gameApplication = this;
 }
 
@@ -31,6 +34,22 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         return false;
     }
 
+    if (!al_install_keyboard()) {
+        std::cerr << "Allegro initialize the keyboard failed" << std::endl;
+        return -1;
+    }
+
+    if (!al_install_mouse()) {
+        std::cerr << "Allegro initialize the mouse failed" << std::endl;
+        return -1;
+    }
+
+    timer = al_create_timer(1.0 / FPS);
+    if (!timer) {
+        std::cerr << "Allegro timer failed" << std::endl;
+        return -1;
+    }
+
     al_init_image_addon();
 
     event_queue = al_create_event_queue();
@@ -40,6 +59,12 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
     }
 
     al_register_event_source(event_queue, al_get_display_event_source(window));
+
+    al_register_event_source(event_queue, al_get_timer_event_source(timer));
+
+    al_register_event_source(event_queue, al_get_keyboard_event_source());
+
+    al_register_event_source(event_queue, al_get_mouse_event_source());
 
     std::string *title = this->getGameTitle();
     al_set_window_title(window, title->c_str());
@@ -74,7 +99,7 @@ void GameApplication::run() {
 
     while (mIsRunning) {
 
-        if (mQuitting) {
+        if (mIsQuitting) {
             this->onClose();
             break;
         }
@@ -89,13 +114,15 @@ void GameApplication::run() {
         al_init_timeout(&timeout, 0.06);
 
         bool get_event = al_wait_for_event_until(event_queue, &ev, &timeout);
-        if (get_event && ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            mQuitting = true;
+        if (get_event) {
+            handleEvent(ev);
         }
+
+        safeTickEventManager(20);
 
         this->onUpdate(elapsedTime);
 
-        this->onRender(timeParam);
+        this->onRender(elapsedTime);
 
         std::cout << "ElapsedTime: " << elapsedTime << std::endl;
 
@@ -120,21 +147,18 @@ void GameApplication::onUpdate(double elapsedTime) {
     }
 }
 
-void GameApplication::onRender(Time &time) {
+void GameApplication::onRender(double elapsedTime) {
 
     BaseGameLogic *game = this->mGameLogic;
 
     for (GameViewList::const_iterator i = game->getGameViewList()->begin(),
                  end = game->getGameViewList()->end(); i != end; ++i) {
-        (*i)->onRender(time);
+        (*i)->onRender(elapsedTime);
     }
-
-//	this->mGameLogic->VRenderDiagnostics();
-
 }
 
 void GameApplication::abortGame() {
-    this->mQuitting = true;
+    this->mIsQuitting = true;
 }
 
 bool GameApplication::onClose() {
@@ -176,3 +200,14 @@ bool GameApplication::RegisterBaseGameEvents() {
     return true;
 }
 
+void GameApplication::handleEvent(ALLEGRO_EVENT event) {
+    if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+        mIsQuitting = true;
+    }
+//    else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+//        safeTriggerEvent(EvtData_Keyboard_key_Down(event.keyboard.keycode));
+//    }
+    else if (event.type == ALLEGRO_EVENT_MOUSE_AXES) {
+        safeTriggerEvent(EvtData_Mouse_Move(event.mouse.x, event.mouse.y));
+    }
+}

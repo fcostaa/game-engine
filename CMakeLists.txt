@@ -43,6 +43,12 @@ AUX_SOURCE_DIRECTORY(game
 AUX_SOURCE_DIRECTORY(game/Events
         GAME_EVENTS_SOURCES)
 
+AUX_SOURCE_DIRECTORY(game/Actor
+        GAME_ACTOR_SOURCES)
+
+AUX_SOURCE_DIRECTORY(game/SceneGraph
+        GAME_SCENE_GRAPH_SOURCES)
+
 AUX_SOURCE_DIRECTORY(engine
         ENGINE_SOURCES)
 
@@ -84,7 +90,9 @@ LINK_DIRECTORIES(/usr/local/Cellar/allegro/5.2.0/lib)
 
 add_executable(CrossEngineDesktop
         ${GAME_SOURCES}
+        ${GAME_SCENE_GRAPH_SOURCES}
         ${GAME_EVENTS_SOURCES}
+        ${GAME_ACTOR_SOURCES}
         ${ENGINE_SOURCES}
         ${ENGINE_UTILS_SOURCES}
         ${ENGINE_EVENT_MANAGER_SOURCES}

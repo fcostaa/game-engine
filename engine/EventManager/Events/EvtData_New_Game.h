@@ -5,7 +5,7 @@
 #ifndef CROSSENGINEDESKTOP_EVTDATA_NEW_GAME_H
 #define CROSSENGINEDESKTOP_EVTDATA_NEW_GAME_H
 
-#include "../../engine/EventManager/Events/EmptyEventData.h"
+#include "EmptyEventData.h"
 
 class EvtData_New_Game : public EmptyEventData {
 public:

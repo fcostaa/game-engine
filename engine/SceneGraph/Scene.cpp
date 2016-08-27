@@ -17,37 +17,17 @@ Scene::~Scene() {
 
 void Scene::OnRender() {
     if (m_Root) {
-        m_Root->VPreRender(this);
         m_Root->VRender(this);
         m_Root->VRenderChildren(this);
-        m_Root->VPostRender(this);
     }
 }
 
-void Scene::OnUpdate(const int deltaMilliseconds) {
-
-//    static DWORD lastTime = 0;
-//    DWORD elapsedTime = 0;
-//    DWORD now = timeGetTime();
-//
-//    if (!m_Root)
-//        return S_OK;
-//
-//    if (lastTime == 0)
-//    {
-//        lastTime = now;
-//    }
-//
-//    elapsedTime = now - lastTime;
-//    lastTime = now;
-//
-//     m_Root->VOnUpdate(this, elapsedTime);
+void Scene::OnUpdate(const double elapsedTime) {
+    m_Root->VOnUpdate(this, elapsedTime);
 }
 
-
 bool Scene::AddChild(optional<ActorId> id, boost::shared_ptr<ISceneNode> kid) {
-    if (id.valid())
-    {
+    if (id.valid()) {
         // This allows us to search for this later based on actor id
         m_ActorMap[*id] = kid;
     }
@@ -58,4 +38,14 @@ bool Scene::AddChild(optional<ActorId> id, boost::shared_ptr<ISceneNode> kid) {
 bool Scene::RemoveChild(ActorId id) {
     m_ActorMap.erase(id);
     return m_Root->VRemoveChild(id);
+}
+
+boost::shared_ptr<ISceneNode> Scene::FindActor(ActorId id) {
+    SceneActorMap::iterator i = m_ActorMap.find(id);
+    if (i == m_ActorMap.end()) {
+        boost::shared_ptr<ISceneNode> nullISceneNode;
+        return nullISceneNode;
+    }
+
+    return (*i).second;
 }

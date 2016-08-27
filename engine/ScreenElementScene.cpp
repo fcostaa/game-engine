@@ -10,10 +10,10 @@ ScreenElementScene::ScreenElementScene() : Scene() {
 }
 
 void ScreenElementScene::onUpdate(double elapsedTime) {
-//    Scene::OnUpdate(elapsedTime);
+    Scene::OnUpdate(elapsedTime);
 }
 
-void ScreenElementScene::onRender(const Time &time) {
+void ScreenElementScene::onRender(double elapsedTime) {
     Scene::OnRender();
 }
 

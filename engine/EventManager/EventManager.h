@@ -67,7 +67,7 @@ public:
 private:
 
     enum eConstants {
-        kNumQueues = 2
+        kNumQueues = 1
     };
 
     EventTypeSet m_typeList;

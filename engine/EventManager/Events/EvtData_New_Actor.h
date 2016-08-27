@@ -6,8 +6,8 @@
 #define CROSSENGINEDESKTOP_EVTDATA_NEW_ACTOR_H
 
 
-#include "../../engine/EventManager/Events/BaseEventData.h"
-#include "../../engine/Interfaces.h"
+#include "BaseEventData.h"
+#include "../../Actor/Base/ActorParams.h"
 
 class EvtData_New_Actor : public BaseEventData {
 public:
@@ -15,14 +15,14 @@ public:
 
     virtual const EventType &VGetEventType() const;
 
-    explicit EvtData_New_Actor( ActorId id, ActorParams *pCreateParams);
+    explicit EvtData_New_Actor(ActorId id, ActorParams *pCreateParams);
 
     virtual ~EvtData_New_Actor();
 
     virtual IEventDataPtr VCopy() const;
 
-    ActorId m_id;	//ID of actor created
-    ActorParams *m_pActorParams;	//Parameters for actor
+    ActorId m_id;    //ID of actor created
+    ActorParams *m_pActorParams;    //Parameters for actor
 };
 
 
