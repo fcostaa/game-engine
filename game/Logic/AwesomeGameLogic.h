@@ -6,7 +6,7 @@
 #define CROSSENGINEDESKTOP_AWESOMEGAMELOGIC_H
 
 
-#include "../engine/Logic/BaseGameLogic.h"
+#include "../../engine/Logic/BaseGameLogic.h"
 
 class AwesomeGameLogic : public BaseGameLogic {
 

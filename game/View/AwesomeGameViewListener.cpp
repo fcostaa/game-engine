@@ -4,15 +4,19 @@
 
 #include "AwesomeGameViewListener.h"
 #include "AwesomeHumanView.h"
-#include "../engine/Actor/Base/ActorParams.h"
-#include "../engine/EventManager/Events/EvtData_New_Game.h"
-#include "../engine/EventManager/Events/EvtData_New_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
-#include "../engine/EventManager/Events/EvtData_Move_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "../../engine/Actor/Base/ActorParams.h"
+#include "../../engine/EventManager/Events/EvtData_New_Game.h"
+#include "../../engine/EventManager/Events/EvtData_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
+#include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "../../engine/Actor/SpriteObjectParams.h"
 
-AwesomeGameViewListener::AwesomeGameViewListener(AwesomeHumanView *view) {
-    m_pView = view;
+AwesomeGameViewListener::AwesomeGameViewListener(AwesomeHumanView *view) : m_pView(view) {
+}
+
+char const *AwesomeGameViewListener::GetName() {
+    return "AwesomeGameViewListener";
 }
 
 bool AwesomeGameViewListener::HandleEvent(IEventData const &event) {
@@ -26,10 +30,15 @@ bool AwesomeGameViewListener::HandleEvent(IEventData const &event) {
         boost::shared_ptr<ISceneNode> node = ed.m_pActorParams->VCreateSceneNode(m_pView->m_pScene);
         m_pView->m_pScene->AddChild(ed.m_id, node);
 
-        m_pView->m_pPlayer = node;
-        m_pView->m_pController.reset(NEW AwesomeController(node));
-        m_pView->m_KeyboardHandler = m_pView->m_pController;
-        m_pView->m_MouseHandler = m_pView->m_pController;
+        SpriteObjectParams *p = static_cast<SpriteObjectParams *>(ed.m_pActorParams);
+
+        if (p->m_ViewId == m_pView->VGetId()) {
+            m_pView->m_pPlayer = node;
+            m_pView->m_pController.reset(NEW AwesomeController(node));
+            m_pView->m_KeyboardHandler = m_pView->m_pController;
+            m_pView->m_MouseHandler = m_pView->m_pController;
+        }
+
 //        boost::shared_ptr<ISceneNode> node = ed.m_pActorParams->VCreateSceneNode(m_pView->m_pScene);
 //        m_pView->m_pScene->AddChild(ed.m_pActorParams->m_Id, node);
 

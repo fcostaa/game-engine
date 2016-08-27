@@ -5,10 +5,10 @@
 #ifndef CROSSENGINEDESKTOP_AWESOMEHUMANVIEW_H
 #define CROSSENGINEDESKTOP_AWESOMEHUMANVIEW_H
 
-#include "../engine/View/HumanView.h"
-#include "../engine/ScreenElementScene.h"
 #include "AwesomeGameViewListener.h"
-#include "AwesomeController.h"
+#include "../../engine/View/HumanView.h"
+#include "../../engine/ScreenElementScene.h"
+#include "../AwesomeController.h"
 
 class AwesomeHumanView : public HumanView {
     friend class AwesomeGameViewListener;

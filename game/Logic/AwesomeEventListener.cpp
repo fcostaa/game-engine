@@ -3,10 +3,10 @@
 //
 
 #include "AwesomeEventListener.h"
-#include "../engine/Actor/Base/ActorParams.h"
-#include "../engine/EventManager/Events/EvtData_New_Game.h"
-#include "../engine/EventManager/Events/EvtData_New_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Request_New_Actor.h"
+#include "../../engine/Actor/Base/ActorParams.h"
+#include "../../engine/EventManager/Events/EvtData_New_Game.h"
+#include "../../engine/EventManager/Events/EvtData_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Request_New_Actor.h"
 
 AwesomeEventListener::AwesomeEventListener(AwesomeGameLogic *awesomeGameLogic) : m_AwesomeGameLogic(awesomeGameLogic) {
 

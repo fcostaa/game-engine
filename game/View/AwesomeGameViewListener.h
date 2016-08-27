@@ -6,7 +6,7 @@
 #define CROSSENGINEDESKTOP_AWESOMEGAMEVIEWLISTENER_H
 
 
-#include "../engine/EventManager/Events/IEventListener.h"
+#include "../../engine/EventManager/Events/IEventListener.h"
 
 class AwesomeHumanView;
 
@@ -17,7 +17,7 @@ private:
 public:
     explicit AwesomeGameViewListener(AwesomeHumanView *view);
 
-    virtual char const *GetName(void) { return "TeapotWarsGameViewListener"; }
+    virtual char const *GetName();
 
     virtual bool HandleEvent(IEventData const &event);
 };

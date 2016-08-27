@@ -9,6 +9,8 @@
 
 struct SpriteObjectParams : public ActorParams {
 
+    GameViewId m_ViewId;
+
     SpriteObjectParams();
 
     virtual boost::shared_ptr<IActor> VCreate(BaseGameLogic *logic) override;

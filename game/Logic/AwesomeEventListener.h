@@ -5,7 +5,6 @@
 #ifndef CROSSENGINEDESKTOP_AWESOMEEVENTLISTENER_H
 #define CROSSENGINEDESKTOP_AWESOMEEVENTLISTENER_H
 
-#include "../engine/EventManager/Events/IEventListener.h"
 #include "AwesomeGameLogic.h"
 
 class AwesomeEventListener : public IEventListener {

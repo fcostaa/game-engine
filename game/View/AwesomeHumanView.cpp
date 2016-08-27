@@ -4,13 +4,20 @@
 
 #include <iostream>
 #include "AwesomeHumanView.h"
-#include "../engine/EventManager/IEventManager.h"
-#include "../engine/EventManager/Events/EvtData_New_Game.h"
-#include "../engine/EventManager/Events/EvtData_New_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
-#include "../engine/EventManager/Events/EvtData_Move_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Request_New_Actor.h"
-#include "../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "../../engine/EventManager/IEventManager.h"
+#include "../../engine/EventManager/Events/EvtData_New_Game.h"
+#include "../../engine/EventManager/Events/EvtData_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
+#include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Request_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "../../engine/EventManager/IEventManager.h"
+#include "../../engine/EventManager/Events/EvtData_New_Game.h"
+#include "../../engine/EventManager/Events/EvtData_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Request_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
+#include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 
 
 AwesomeHumanView::AwesomeHumanView() {

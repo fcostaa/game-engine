@@ -4,14 +4,14 @@
 
 #include <iosfwd>
 #include "AwesomeGameApplication.h"
-#include "AwesomeHumanView.h"
-#include "AwesomeGameLogic.h"
 #include "../engine/EventManager/Events/EvtData_New_Actor.h"
 #include "../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../engine/EventManager/Events/EvtData_Move_Actor.h"
 #include "../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
 #include "../engine/EventManager/Events/EvtData_Request_New_Actor.h"
 #include "../engine/EventManager/Events/EvtData_Mouse_Move.h"
+#include "Logic/AwesomeGameLogic.h"
+#include "View/AwesomeHumanView.h"
 
 bool AwesomeGameApplication::loadGame() {
     return mGameLogic->VLoadGame();
@@ -24,10 +24,6 @@ std::string *AwesomeGameApplication::getGameTitle() {
 
 BaseGameLogic *AwesomeGameApplication::createGameAndView() {
     BaseGameLogic *game = NEW AwesomeGameLogic();
-
-    boost::shared_ptr<IGameView> playersView(new AwesomeHumanView());
-    game->addGameView(playersView);
-
     return game;
 }
 

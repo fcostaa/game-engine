@@ -2,7 +2,6 @@
 // Created by Felipe Costa on 8/23/16.
 //
 
-#include <allegro5/keycodes.h>
 #include "AwesomeController.h"
 #include "../engine/EventManager/Events/IEventData.h"
 #include "../engine/EventManager/Events/EvtData_Move_Actor.h"
