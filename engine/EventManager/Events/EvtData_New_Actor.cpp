@@ -13,9 +13,8 @@ EvtData_New_Actor::EvtData_New_Actor(ActorId id, ActorParams *pCreateParams) {
     m_pActorParams->m_Id = id;
 }
 
-
 EvtData_New_Actor::~EvtData_New_Actor() {
-//    SAFE_DELETE(m_pActorParams);
+    SAFE_DELETE(m_pActorParams);
 }
 
 const EventType &EvtData_New_Actor::VGetEventType() const {

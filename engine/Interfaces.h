@@ -10,6 +10,7 @@
 
 #include "Timer/Timer.h"
 #include "Utils/Optional.h"
+#include "Math/Vec2.h"
 
 class IKeyboardHandler {
 public:
@@ -40,10 +41,14 @@ class IActor {
 public:
     virtual void VSetID(ActorId id) = 0;
 
+    virtual void VSetPosition(Vec2 newPosition) = 0;
+
 public:
     virtual ~IActor() { }
 
     virtual ActorId VGetID() = 0;
+
+    virtual Vec2 const VGetPosition() = 0;
 
     virtual boost::shared_ptr<ActorParams> VGetParams() = 0;
 
@@ -117,7 +122,7 @@ public:
 
     virtual bool VIsVisible(Scene *pScene) const = 0;
 
-    virtual void VTranslate(int posX, int posY) = 0;
+    virtual void VSetPosition(Vec2 position) = 0;
 
     virtual ~ISceneNode() { };
 };

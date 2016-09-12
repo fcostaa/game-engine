@@ -23,7 +23,7 @@ protected:
 
     void BuildInitialScene();
 
-    void MoveActor(ActorId i, int i1, int i2);
+    void MoveActor(ActorId i, Vec2 position);
 
 public:
     AwesomeHumanView();

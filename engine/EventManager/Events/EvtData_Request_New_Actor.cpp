@@ -3,9 +3,8 @@
 //
 
 #include "EvtData_Request_New_Actor.h"
-#include "EvtData_New_Actor.h"
 
-const EventType EvtData_Request_New_Actor::sk_EventType( "request_new_actor" );
+const EventType EvtData_Request_New_Actor::sk_EventType("request_new_actor");
 
 EvtData_Request_New_Actor::EvtData_Request_New_Actor(const ActorParams *pCreateParams) : m_pActorParams(NULL) {
     m_pActorParams = reinterpret_cast<ActorParams *>(NEW char[pCreateParams->m_Size]);

@@ -5,7 +5,7 @@
 #include "SpriteNode.h"
 
 SpriteNode::SpriteNode(SpriteObjectParams const &params, std::string name, ALLEGRO_BITMAP *image) :
-        SceneNode(params.m_Id, name) {
+        SceneNode(params.m_Id, name, params.m_Pos) {
     m_pImage = image;
 }
 
@@ -19,7 +19,8 @@ void SpriteNode::VRender(Scene *pScene) {
     if (m_pImage != NULL) {
         int bitmap_width = al_get_bitmap_width(m_pImage);
         int bitmap_height = al_get_bitmap_height(m_pImage);
-        al_draw_bitmap(m_pImage, m_Props.getPosX() - bitmap_width / 2, m_Props.getPosY() - bitmap_height / 2, 0);
+        al_draw_bitmap(m_pImage, m_Props.getPosition().getX() - bitmap_width / 2, m_Props.getPosition().getY() - bitmap_height / 2, 0);
+//        al_draw_bitmap(m_pImage, m_Props.getPosition().getX() - bitmap_width / 2, m_Props.getPosition().getY() - bitmap_height / 2, 0);
 
 //        int bitmap_width = al_get_bitmap_width(m_pImage);
 //        int bitmap_height = al_get_bitmap_height(m_pImage);

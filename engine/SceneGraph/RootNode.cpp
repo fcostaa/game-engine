@@ -4,7 +4,7 @@
 
 #include "RootNode.h"
 
-RootNode::RootNode() : SceneNode(optional_empty(), "Root") {
+RootNode::RootNode() : SceneNode(optional_empty(), "Root", Vec2()) {
 
 }
 

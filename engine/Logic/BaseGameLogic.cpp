@@ -6,6 +6,8 @@
 #include "../Actor/Base/ActorParams.h"
 #include "../EventManager/Events/EvtData_New_Game.h"
 
+#import <cmath>
+
 BaseGameLogic::BaseGameLogic() :
         mGameViews(0), m_LastActorId(0) {
 
@@ -38,8 +40,11 @@ void BaseGameLogic::removeGameView(boost::shared_ptr<IGameView> view) {
     mGameViews->remove(view);
 }
 
-void BaseGameLogic::onUpdate(double elapsedTime) {
+void BaseGameLogic::VAddCollisionCircle(std::pair<Vec2, float> circle, ActorId id) {
+    m_CollisionCircleMap.insert(std::make_pair(id, circle));
+}
 
+void BaseGameLogic::onUpdate(double elapsedTime) {
     switch (mState) {
         case INITIALIZING:
             // If we get to here we're ready to attach players
@@ -57,6 +62,45 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
 
         case RUNNING:
             mProcessManager->updateProcesses(elapsedTime);
+
+            for (CollisionCircleMap::const_iterator it = m_CollisionCircleMap.begin(),
+                         itEnd = m_CollisionCircleMap.end(); it != itEnd; it++) {
+                ActorId const id = it->first;
+                std::pair<Vec2, float> circle = it->second;
+                boost::shared_ptr<IActor> gameActor = VGetActor(id);
+
+                Vec2 actorPosition = gameActor->VGetPosition();
+                Vec2 newActorPosition(actorPosition.getX(), actorPosition.getY());
+                m_CollisionCircleMap[id] = std::make_pair(newActorPosition, circle.second);
+            }
+
+            for (CollisionCircleMap::const_iterator it = m_CollisionCircleMap.begin(),
+                         itEnd = m_CollisionCircleMap.end(); it != itEnd; it++) {
+
+                Vec2 center1 = it->second.first;
+                float radius1 = it->second.second;
+                ActorId actorId = it->first;
+
+                for (CollisionCircleMap::const_iterator it2 = m_CollisionCircleMap.begin(),
+                             itEnd2 = m_CollisionCircleMap.end(); it2 != itEnd2; it2++) {
+
+                    if (actorId == it2->first) {
+                        continue;
+                    }
+
+                    Vec2 center2 = it2->second.first;
+                    float radius2 = it2->second.second;
+
+                    float dx = center1.getX() - center2.getX();
+                    float dy = center1.getY() - center2.getY();
+                    float distance = sqrtf(dx * dx + dy * dy);
+
+                    if (distance < radius1 + radius2) {
+                        std::cout << ">>>>>>>>>> collision detected!" << std::endl;
+                    }
+                }
+            }
+
             break;
 
         default:
@@ -87,6 +131,14 @@ void BaseGameLogic::VRemoveActor(ActorId id) {
     if (NULL != VGetActor(id).get()) {
 //        m_pPhysics->VRemoveActor(aid);
         m_ActorList.erase(id);
+    }
+}
+
+
+void BaseGameLogic::VMoveActor(const ActorId id, Vec2 position) {
+    boost::shared_ptr<IActor> pActor = VGetActor(id);
+    if (pActor) {
+        pActor->VSetPosition(position);
     }
 }
 

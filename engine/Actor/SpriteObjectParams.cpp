@@ -15,6 +15,8 @@ boost::shared_ptr<IActor> SpriteObjectParams::VCreate(BaseGameLogic *logic) {
     boost::shared_ptr<IActor> pTestObject(
             new BaseActor(boost::shared_ptr<SpriteObjectParams>(NEW SpriteObjectParams(*this))));
     logic->VAddActor(pTestObject, this);
+
+    logic->VAddCollisionCircle(std::make_pair(m_Pos, m_Radius), pTestObject->VGetID());
     return pTestObject;
 }
 
@@ -27,5 +29,6 @@ boost::shared_ptr<ISceneNode> SpriteObjectParams::VCreateSceneNode(boost::shared
 
     boost::shared_ptr<SceneNode> sprite(NEW SpriteNode(*this, "Sprite", img));
     pScene->AddChild(m_Id, sprite);
+
     return sprite;
 }

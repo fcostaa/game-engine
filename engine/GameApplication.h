@@ -58,7 +58,7 @@ public:
 
     bool IsRunning() const;
 
-    const BaseGameLogic *getGameLogic() const;
+    BaseGameLogic *getGameLogic();
 
     //Virtual
     virtual bool loadGame() = 0;

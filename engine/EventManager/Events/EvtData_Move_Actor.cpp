@@ -6,12 +6,12 @@
 
 const EventType EvtData_Move_Actor::sk_EventType("move_actor");
 
-EvtData_Move_Actor::EvtData_Move_Actor(ActorId actorId, int posX, int poxY) : actorId(actorId),
-                                                                              posX(posX),
-                                                                              poxY(poxY) { }
+EvtData_Move_Actor::EvtData_Move_Actor(ActorId actorId, Vec2 position) : actorId(actorId),
+                                                                         position(position) {
+}
 
 IEventDataPtr EvtData_Move_Actor::VCopy() const {
-    return IEventDataPtr(NEW EvtData_Move_Actor(actorId, posX, poxY));
+    return IEventDataPtr(NEW EvtData_Move_Actor(actorId, position));
 }
 
 const EventType &EvtData_Move_Actor::VGetEventType() const {

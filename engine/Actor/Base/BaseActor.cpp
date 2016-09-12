@@ -17,6 +17,16 @@ void BaseActor::VSetID(ActorId id) {
     m_id = id;
 }
 
+Vec2 const BaseActor::VGetPosition() {
+    return position;
+}
+
+void BaseActor::VSetPosition(Vec2 newPosition) {
+    position = newPosition;
+//    std::cout << "VSetPosition: " << position.getX() << " and: "
+//    << position.getY() << std::endl;
+}
+
 ActorId BaseActor::VGetID() {
     return m_id;
 }

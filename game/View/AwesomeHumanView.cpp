@@ -58,9 +58,9 @@ void AwesomeHumanView::VOnAttach(GameViewId vid, optional<ActorId> aid) {
     BuildInitialScene();
 }
 
-void AwesomeHumanView::MoveActor(ActorId id, int posX, int posY) {
+void AwesomeHumanView::MoveActor(ActorId id, Vec2 position) {
     boost::shared_ptr<ISceneNode> node = m_pScene->FindActor(id);
     if (node) {
-        node->VTranslate(posX, posY);
+        node->VSetPosition(position);
     }
 }

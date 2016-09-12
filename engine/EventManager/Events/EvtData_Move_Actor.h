@@ -15,11 +15,9 @@ struct EvtData_Move_Actor : public BaseEventData {
 
     ActorId actorId;
 
-    int posX;
+    Vec2 position;
 
-    int poxY;
-
-    EvtData_Move_Actor(ActorId actorId, int posX, int poxY);
+    EvtData_Move_Actor(ActorId actorId, Vec2 position);
 
     virtual IEventDataPtr VCopy() const;
 

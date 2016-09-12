@@ -44,12 +44,6 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         return -1;
     }
 
-    timer = al_create_timer(1.0 / FPS);
-    if (!timer) {
-        std::cerr << "Allegro timer failed" << std::endl;
-        return -1;
-    }
-
     al_init_image_addon();
 
     event_queue = al_create_event_queue();
@@ -57,6 +51,13 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         fprintf(stderr, "failed to create event_queue!\n");
         return false;
     }
+
+    timer = al_create_timer(1.0 / FPS);
+    if (!timer) {
+        std::cerr << "Allegro timer failed" << std::endl;
+        return -1;
+    }
+    al_start_timer(timer);
 
     al_register_event_source(event_queue, al_get_display_event_source(window));
 
@@ -90,13 +91,13 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
 
 void GameApplication::run() {
 
-//    starTimer();
-//    Time time = Time();
     double elapsedTime;
     double startTime;
     startTime = elapsedTime = al_get_time();
-//    time.elapsedTimeMilliseconds = time.elapsedTime * 1000.0;
+    bool redraw = true;
 
+    ALLEGRO_TIMEOUT timeout;
+    al_init_timeout(&timeout, 0.06);
     while (mIsRunning) {
 
         if (mIsQuitting) {
@@ -104,37 +105,31 @@ void GameApplication::run() {
             break;
         }
 
-//        updateTimer();
-        double current_time = al_get_time();
-        std::cout << "current_time: " << current_time << std::endl;
-        elapsedTime = current_time - elapsedTime;
-
         ALLEGRO_EVENT ev;
-        ALLEGRO_TIMEOUT timeout;
-        al_init_timeout(&timeout, 0.06);
+        al_wait_for_event(event_queue, &ev);
 
-        bool get_event = al_wait_for_event_until(event_queue, &ev, &timeout);
-        if (get_event) {
-            handleEvent(ev);
+        if (ev.type == ALLEGRO_EVENT_TIMER) {
+            redraw = true;
+            this->onUpdate(elapsedTime);
+            safeTickEventManager(20);
+        } else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+            mIsQuitting = true;
+        } else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+                mIsQuitting = true;
+            }
+        } else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES) {
+            safeTriggerEvent(EvtData_Mouse_Move(ev.mouse.x, ev.mouse.y));
         }
 
-        safeTickEventManager(20);
+        if (redraw && al_is_event_queue_empty(event_queue)) {
+            redraw = false;
+            al_clear_to_color(al_map_rgb(255, 255, 255));
+            this->onRender(elapsedTime);
+            al_flip_display();
 
-        this->onUpdate(elapsedTime);
-
-        this->onRender(elapsedTime);
-
-        std::cout << "ElapsedTime: " << elapsedTime << std::endl;
-
-        al_flip_display();
-
-        al_rest(0.000001);
-
-        al_set_target_bitmap(al_get_backbuffer(window));
-
-        al_clear_to_color(al_map_rgb(255, 255, 255));
-
-        std::cout << std::endl << std::endl;
+            al_set_target_bitmap(al_get_backbuffer(window));
+        }
     }
 
 }
@@ -182,7 +177,7 @@ bool GameApplication::IsRunning() const {
     return this->mIsRunning;
 }
 
-const BaseGameLogic *GameApplication::getGameLogic() const {
+BaseGameLogic *GameApplication::getGameLogic() {
     return this->mGameLogic;
 }
 
@@ -202,6 +197,8 @@ bool GameApplication::RegisterBaseGameEvents() {
 
 void GameApplication::handleEvent(ALLEGRO_EVENT event) {
     if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+        mIsQuitting = true;
+    } else if (event.type == ALLEGRO_KEY_ESCAPE) {
         mIsQuitting = true;
     }
 //    else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {

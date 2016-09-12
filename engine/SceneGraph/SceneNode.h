@@ -23,7 +23,7 @@ protected:
 
 public:
 
-    SceneNode(optional<ActorId> actorId, std::string name);
+    SceneNode(optional<ActorId> actorId, std::string name, Vec2 position);
 
     virtual ~SceneNode();
 
@@ -41,7 +41,7 @@ public:
 
     virtual const SceneNodeProperties *const VGet() const;
 
-    virtual void VTranslate(int posX, int posY);
+    virtual void VSetPosition(Vec2 position);
 };
 
 

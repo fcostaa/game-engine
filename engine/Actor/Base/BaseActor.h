@@ -14,6 +14,7 @@ class BaseActor : public IActor {
 
 protected:
     ActorId m_id;
+    Vec2 position;
 
     boost::shared_ptr<ActorParams> m_Params;
 public:
@@ -22,6 +23,10 @@ public:
     virtual void VOnUpdate(int deltaMilliseconds);
 
     virtual void VSetID(ActorId id);
+
+    virtual Vec2 const VGetPosition();
+
+    virtual void VSetPosition(Vec2 newPosition);
 
     virtual ActorId VGetID();
 

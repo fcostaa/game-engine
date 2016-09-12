@@ -11,7 +11,7 @@ void ProcessManager::attach(const boost::shared_ptr<Process> process) {
 }
 
 void ProcessManager::updateProcesses(double elapsedTime) {
-    std::cout << "Process List size:" << this->mProcessList.size() << std::endl;
+    // std::cout << "Process List size:" << this->mProcessList.size() << std::endl;
     ProcessList::const_iterator i = this->mProcessList.begin();
     ProcessList::const_iterator end = this->mProcessList.end();
     boost::shared_ptr<Process> next;
@@ -62,5 +62,5 @@ void ProcessManager::detach(boost::shared_ptr<Process> process) {
 }
 
 ProcessManager::ProcessManager() : mProcessList(0) {
-    std::cout << "ProcessManager with mProcessList.size: " << this->mProcessList.size() << std::endl;
+    // std::cout << "ProcessManager with mProcessList.size: " << this->mProcessList.size() << std::endl;
 }

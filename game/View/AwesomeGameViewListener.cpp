@@ -76,7 +76,7 @@ bool AwesomeGameViewListener::HandleEvent(IEventData const &event) {
         return true;
     } else if (eventType == EvtData_Move_Actor::sk_EventType) {
         const EvtData_Move_Actor &ed = static_cast< const EvtData_Move_Actor & >( event );
-        m_pView->MoveActor(ed.actorId, ed.posX, ed.poxY);
+        m_pView->MoveActor(ed.actorId, ed.position);
     }
 
     return false;

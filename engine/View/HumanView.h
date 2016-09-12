@@ -20,9 +20,9 @@ protected:
     GameViewId m_ViewId;
     optional<ActorId> m_ActorId;
 
-public:
     boost::shared_ptr<IMouseHandler> m_MouseHandler;
     boost::shared_ptr<IKeyboardHandler> m_KeyboardHandler;
+public:
 
     HumanView();
 

@@ -12,8 +12,11 @@ ActorParams::~ActorParams() {
 
 }
 
-ActorParams::ActorParams(const ActorParams &actorParams) : ActorParams() {
+ActorParams::ActorParams(const ActorParams &actorParams) {
     m_Id = actorParams.m_Id;
+    m_Pos = actorParams.m_Pos;
+    m_Radius = actorParams.m_Radius;
+    m_Size = sizeof(ActorParams);
 }
 
 boost::shared_ptr<IActor> ActorParams::VCreate(BaseGameLogic *logic) {

@@ -9,6 +9,7 @@
 #include <string>
 #include "../Utils/Optional.h"
 #include "../Interfaces.h"
+#include "../Math/Vec2.h"
 
 class SceneNodeProperties {
 
@@ -18,20 +19,15 @@ protected:
     optional<ActorId> m_ActorId;
     std::string m_Name;
 
-    int posX;
-    int posY;
+    Vec2 position;
 
 public:
     optional<ActorId> const &ActorId() const;
 
     const char *Name() const;
 
-    int getPosX() const {
-        return posX;
-    }
-
-    int getPosY() const {
-        return posY;
+    const Vec2 &getPosition() const {
+        return position;
     }
 };
 

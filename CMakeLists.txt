@@ -43,11 +43,11 @@ AUX_SOURCE_DIRECTORY(game
 AUX_SOURCE_DIRECTORY(game/Events
         GAME_EVENTS_SOURCES)
 
-AUX_SOURCE_DIRECTORY(game/Actor
-        GAME_ACTOR_SOURCES)
+#AUX_SOURCE_DIRECTORY(game/Actor
+#        GAME_ACTOR_SOURCES)
 
-AUX_SOURCE_DIRECTORY(game/SceneGraph
-        GAME_SCENE_GRAPH_SOURCES)
+#AUX_SOURCE_DIRECTORY(game/SceneGraph
+#        GAME_SCENE_GRAPH_SOURCES)
 
 AUX_SOURCE_DIRECTORY(game/Logic
         GAME_LOGIC_SOURCES)
@@ -85,6 +85,9 @@ AUX_SOURCE_DIRECTORY(engine/Timer
 AUX_SOURCE_DIRECTORY(engine/SceneGraph
         ENGINE_SCENE_GRAPH_SOURCES)
 
+AUX_SOURCE_DIRECTORY(engine/Math
+        ENGINE_MATH_SOURCES)
+
 AUX_SOURCE_DIRECTORY(engine/Utils
         ENGINE_UTILS_SOURCES)
 
@@ -96,9 +99,9 @@ LINK_DIRECTORIES(/usr/local/Cellar/allegro/5.2.0/lib)
 
 add_executable(CrossEngineDesktop
         ${GAME_SOURCES}
-        ${GAME_SCENE_GRAPH_SOURCES}
         ${GAME_EVENTS_SOURCES}
-        ${GAME_ACTOR_SOURCES}
+#        ${GAME_ACTOR_SOURCES}
+#        ${GAME_SCENE_GRAPH_SOURCES}
         ${GAME_LOGIC_SOURCES}
         ${GAME_VIEW_SOURCES}
         ${ENGINE_SOURCES}
@@ -111,6 +114,7 @@ add_executable(CrossEngineDesktop
         ${ENGINE_TIMER_SOURCES}
         ${ENGINE_VIEW_SOURCES}
         ${ENGINE_SCENE_GRAPH_SOURCES}
+        ${ENGINE_MATH_SOURCES}
         engine/Utils/Optional.h
         engine/Interfaces.h
         engine/standards.h

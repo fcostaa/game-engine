@@ -9,10 +9,10 @@
 //class MyGameView : public IGameView {
 //public:
 //    virtual void onUpdate(double elapsedTime) {
-//        std::cout << "Hello World Update with time: " << &time << std::endl; }
+//        // std::cout << "Hello World Update with time: " << &time << std::endl; }
 //
 //    virtual void onRender(const Time &time) {
-//        std::cout << "Hello World Render" << std::endl;
+//        // std::cout << "Hello World Render" << std::endl;
 //    }
 //};
 
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     game.shutDown();
 
 //    boost::shared_ptr<std::string> x = boost::make_shared<std::string>("hello, world Boost!");
-//    std::cout << *x;
+//    // std::cout << *x;
 //
 //    GLFWwindow* window;
 //

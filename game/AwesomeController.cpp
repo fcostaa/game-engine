@@ -13,13 +13,13 @@ AwesomeController::AwesomeController(boost::shared_ptr<ISceneNode> object) : m_o
 void AwesomeController::VOnKeyDown(const int keyCode) {
 //    if (keyCode == ALLEGRO_KEY_RIGHT) {
 //        optional<ActorId> aid = m_object->VGet()->ActorId();
-//        safeQueEvent(IEventDataPtr(NEW EvtData_Move_Actor(*aid, 5, 0)));
+//        safeQueEvent(IEventDataPtr(NEW EvtData_Move_Actor(*aid, Vec2(5, 0))));
 //    }
 }
 
 bool AwesomeController::VOnMouseMove(const int dx, const int dy) {
     optional<ActorId> aid = m_object->VGet()->ActorId();
-    safeQueEvent(IEventDataPtr(NEW EvtData_Move_Actor(*aid, dx, dy)));
+    safeQueEvent(IEventDataPtr(NEW EvtData_Move_Actor(*aid, Vec2(dx, dy))));
 }
 
 void AwesomeController::OnUpdate(double elapsedTime) {

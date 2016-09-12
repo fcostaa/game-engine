@@ -7,6 +7,7 @@
 #include "../../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../../engine/EventManager/Events/EvtData_New_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Request_New_Actor.h"
+#include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 
 AwesomeEventListener::AwesomeEventListener(AwesomeGameLogic *awesomeGameLogic) : m_AwesomeGameLogic(awesomeGameLogic) {
 
@@ -21,12 +22,12 @@ char const *AwesomeEventListener::GetName(void) {
 }
 
 bool AwesomeEventListener::HandleEvent(IEventData const &event) {
-    std::cout << "AwesomeGameViewListener::HandleEvent" << std::endl;
+    // std::cout << "AwesomeGameViewListener::HandleEvent" << std::endl;
 
     EventType eventType = event.VGetEventType();
 
     if (eventType == EvtData_New_Game::sk_EventType) {
-        std::cout << "New Game Event" << std::endl;
+        // std::cout << "New Game Event" << std::endl;
         return true;
     } else if (eventType == EvtData_Request_New_Actor::sk_EventType) {
         const EvtData_Request_New_Actor &castEvent = static_cast< const EvtData_Request_New_Actor & >( event );
@@ -53,6 +54,9 @@ bool AwesomeEventListener::HandleEvent(IEventData const &event) {
         pActorParams->VCreate(m_AwesomeGameLogic);
 
         return castEvent.m_id != 0;
+    } else if (eventType == EvtData_Move_Actor::sk_EventType) {
+        const EvtData_Move_Actor &castEvent = static_cast< const EvtData_Move_Actor & >( event );
+        m_AwesomeGameLogic->VMoveActor(castEvent.actorId, castEvent.position);
     }
 
     return false;

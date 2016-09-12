@@ -9,12 +9,17 @@
 //#include "../../Interfaces.h"
 #include "../../Logic/BaseGameLogic.h"
 #include "../../SceneGraph/SceneNode.h"
+#include "../../Math/Vec2.h"
 
 struct ActorParams {
 
     size_t m_Size;
 
     optional<ActorId> m_Id;
+
+    Vec2 m_Pos;
+
+    float m_Radius;
 
     ActorParams();
 

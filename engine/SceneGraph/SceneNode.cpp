@@ -4,11 +4,11 @@
 
 #include "SceneNode.h"
 
-SceneNode::SceneNode(optional<ActorId> actorId, std::string name) {
+SceneNode::SceneNode(optional<ActorId> actorId, std::string name, Vec2 position) {
     m_pParent = NULL;
     m_Props.m_ActorId = actorId;
     m_Props.m_Name = name;
-    VTranslate(0, 0);
+    VSetPosition(position);
 }
 
 SceneNode::~SceneNode() {
@@ -66,7 +66,6 @@ bool SceneNode::VRemoveChild(ActorId id) {
     return false;
 }
 
-void SceneNode::VTranslate(int posX, int posY) {
-    m_Props.posX = posX;
-    m_Props.posY = posY;
+void SceneNode::VSetPosition(Vec2 position) {
+    m_Props.position = position;
 }
