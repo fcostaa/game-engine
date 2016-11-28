@@ -5,19 +5,19 @@
 #ifndef CROSSENGINEDESKTOP_AWESOMEHUMANVIEW_H
 #define CROSSENGINEDESKTOP_AWESOMEHUMANVIEW_H
 
-#include "AwesomeGameViewListener.h"
+#include "DriftsGameViewListener.h"
 #include "../../engine/View/HumanView.h"
 #include "../../engine/ScreenElementScene.h"
-#include "../AwesomeController.h"
+#include "../DriftsController.h"
 
-class AwesomeHumanView : public HumanView {
-    friend class AwesomeGameViewListener;
+class DriftsHumanView : public HumanView {
+    friend class DriftsGameViewListener;
 
 protected:
 
     boost::shared_ptr<ScreenElementScene> m_pScene;
 
-    boost::shared_ptr<AwesomeController> m_pController;
+    boost::shared_ptr<DriftsController> m_pController;
 
     boost::shared_ptr<ISceneNode> m_pPlayer;
 
@@ -26,9 +26,9 @@ protected:
     void MoveActor(ActorId i, Vec2 position);
 
 public:
-    AwesomeHumanView();
+    DriftsHumanView();
 
-    ~AwesomeHumanView();
+    ~DriftsHumanView();
 
     virtual void onUpdate(double elapsedTime) override;
 

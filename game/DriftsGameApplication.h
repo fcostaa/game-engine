@@ -7,7 +7,7 @@
 
 #include "../engine/GameApplication.h"
 
-class AwesomeGameApplication : public GameApplication {
+class DriftsGameApplication : public GameApplication {
 public:
     virtual bool loadGame() override;
 
@@ -15,7 +15,7 @@ public:
 
     virtual BaseGameLogic *createGameAndView() override;
 
-    virtual bool RegisterBaseGameEvents() override;
+    virtual bool registerBaseGameEvents() override;
 };
 
 

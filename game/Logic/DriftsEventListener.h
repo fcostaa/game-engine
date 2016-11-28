@@ -5,12 +5,12 @@
 #ifndef CROSSENGINEDESKTOP_AWESOMEEVENTLISTENER_H
 #define CROSSENGINEDESKTOP_AWESOMEEVENTLISTENER_H
 
-#include "AwesomeGameLogic.h"
+#include "DriftsGameLogic.h"
 
 class AwesomeEventListener : public IEventListener {
 public:
 
-    explicit AwesomeEventListener(AwesomeGameLogic *awesomeGameLogic);
+    explicit AwesomeEventListener(DriftsGameLogic *awesomeGameLogic);
 
     virtual ~AwesomeEventListener();
 
@@ -19,7 +19,7 @@ public:
     bool HandleEvent(IEventData const &event);
 
 private:
-    AwesomeGameLogic *m_AwesomeGameLogic;
+    DriftsGameLogic *m_AwesomeGameLogic;
 };
 
 

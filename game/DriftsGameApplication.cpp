@@ -3,32 +3,32 @@
 //
 
 #include <iosfwd>
-#include "AwesomeGameApplication.h"
+#include "DriftsGameApplication.h"
 #include "../engine/EventManager/Events/EvtData_New_Actor.h"
 #include "../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../engine/EventManager/Events/EvtData_Move_Actor.h"
 #include "../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
 #include "../engine/EventManager/Events/EvtData_Request_New_Actor.h"
 #include "../engine/EventManager/Events/EvtData_Mouse_Move.h"
-#include "Logic/AwesomeGameLogic.h"
-#include "View/AwesomeHumanView.h"
+#include "Logic/DriftsGameLogic.h"
+#include "View/DriftsHumanView.h"
 
-bool AwesomeGameApplication::loadGame() {
+bool DriftsGameApplication::loadGame() {
     return mGameLogic->VLoadGame();
 }
 
-std::string *AwesomeGameApplication::getGameTitle() {
-    std::string *title = NEW std::string("Cross Platform engine");
+std::string *DriftsGameApplication::getGameTitle() {
+    std::string *title = NEW std::string("Drifts Game");
     return title;
 }
 
-BaseGameLogic *AwesomeGameApplication::createGameAndView() {
-    BaseGameLogic *game = NEW AwesomeGameLogic();
+BaseGameLogic *DriftsGameApplication::createGameAndView() {
+    BaseGameLogic *game = NEW DriftsGameLogic();
     return game;
 }
 
-bool AwesomeGameApplication::RegisterBaseGameEvents() {
-    bool isSuperRegister = GameApplication::RegisterBaseGameEvents();
+bool DriftsGameApplication::registerBaseGameEvents() {
+    bool isSuperRegister = GameApplication::registerBaseGameEvents();
     if (isSuperRegister) {
         mEventManager->RegisterEvent<EvtData_New_Game>(EvtData_New_Game::sk_EventType);
         mEventManager->RegisterEvent<EvtData_New_Actor>(EvtData_New_Actor::sk_EventType);

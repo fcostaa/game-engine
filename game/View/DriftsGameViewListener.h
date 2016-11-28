@@ -8,14 +8,14 @@
 
 #include "../../engine/EventManager/Events/IEventListener.h"
 
-class AwesomeHumanView;
+class DriftsHumanView;
 
-class AwesomeGameViewListener : public IEventListener {
+class DriftsGameViewListener : public IEventListener {
 private:
-    AwesomeHumanView *m_pView;
+    DriftsHumanView *m_pView;
 
 public:
-    explicit AwesomeGameViewListener(AwesomeHumanView *view);
+    explicit DriftsGameViewListener(DriftsHumanView *view);
 
     virtual char const *GetName();
 

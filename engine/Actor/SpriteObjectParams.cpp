@@ -17,6 +17,7 @@ boost::shared_ptr<IActor> SpriteObjectParams::VCreate(BaseGameLogic *logic) {
     logic->VAddActor(pTestObject, this);
 
     logic->VAddCollisionCircle(std::make_pair(m_Pos, m_Radius), pTestObject->VGetID());
+    logic->VGetActor(pTestObject->VGetID())->VSetPosition(m_Pos);
     return pTestObject;
 }
 

@@ -8,13 +8,13 @@
 #include "../engine/Interfaces.h"
 #include "../engine/SceneGraph/SceneNodeProperties.h"
 
-class AwesomeController : public IMouseHandler, public IKeyboardHandler {
+class DriftsController : public IMouseHandler, public IKeyboardHandler {
 
 protected:
     boost::shared_ptr<ISceneNode> m_object;
 
 public:
-    AwesomeController(boost::shared_ptr<ISceneNode> object);
+    DriftsController(boost::shared_ptr<ISceneNode> object);
 
     void OnUpdate(double elapsedTime);
 

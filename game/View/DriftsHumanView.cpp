@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "AwesomeHumanView.h"
+#include "DriftsHumanView.h"
 #include "../../engine/EventManager/IEventManager.h"
 #include "../../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../../engine/EventManager/Events/EvtData_New_Actor.h"
@@ -20,10 +20,10 @@
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 
 
-AwesomeHumanView::AwesomeHumanView() {
+DriftsHumanView::DriftsHumanView() {
     m_pScene.reset(NEW ScreenElementScene());
 
-    EventListenerPtr listener(NEW AwesomeGameViewListener(this));
+    EventListenerPtr listener(NEW DriftsGameViewListener(this));
 
     safeAddListener(listener, EvtData_New_Game::sk_EventType);
     safeAddListener(listener, EvtData_New_Actor::sk_EventType);
@@ -33,15 +33,15 @@ AwesomeHumanView::AwesomeHumanView() {
     safeAddListener(listener, EvtData_Move_Actor::sk_EventType);
 }
 
-AwesomeHumanView::~AwesomeHumanView() {
+DriftsHumanView::~DriftsHumanView() {
 
 }
 
-void AwesomeHumanView::BuildInitialScene() {
+void DriftsHumanView::BuildInitialScene() {
     VPushElement(m_pScene);
 }
 
-void AwesomeHumanView::onUpdate(double elapsedTime) {
+void DriftsHumanView::onUpdate(double elapsedTime) {
     HumanView::onUpdate(elapsedTime);
 
     if (m_pController) {
@@ -49,16 +49,16 @@ void AwesomeHumanView::onUpdate(double elapsedTime) {
     }
 }
 
-void AwesomeHumanView::onRender(double elapsedTime) {
+void DriftsHumanView::onRender(double elapsedTime) {
     HumanView::onRender(elapsedTime);
 }
 
-void AwesomeHumanView::VOnAttach(GameViewId vid, optional<ActorId> aid) {
+void DriftsHumanView::VOnAttach(GameViewId vid, optional<ActorId> aid) {
     HumanView::VOnAttach(vid, aid);
     BuildInitialScene();
 }
 
-void AwesomeHumanView::MoveActor(ActorId id, Vec2 position) {
+void DriftsHumanView::MoveActor(ActorId id, Vec2 position) {
     boost::shared_ptr<ISceneNode> node = m_pScene->FindActor(id);
     if (node) {
         node->VSetPosition(position);

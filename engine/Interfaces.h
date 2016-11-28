@@ -39,20 +39,17 @@ struct ActorParams;
 
 class IActor {
 public:
-    virtual void VSetID(ActorId id) = 0;
-
-    virtual void VSetPosition(Vec2 newPosition) = 0;
-
-public:
-    virtual ~IActor() { }
+    virtual ~IActor() {}
 
     virtual ActorId VGetID() = 0;
 
     virtual Vec2 const VGetPosition() = 0;
 
-    virtual boost::shared_ptr<ActorParams> VGetParams() = 0;
+    virtual void VSetID(ActorId id) = 0;
 
-    virtual void VOnUpdate(int deltaMilliseconds) = 0;
+    virtual void VSetPosition(Vec2 newPosition) = 0;
+
+    virtual boost::shared_ptr<ActorParams> VGetParams() = 0;
 };
 
 class IGameLogic {
@@ -87,7 +84,7 @@ public:
 
 class IScreenElement {
 public:
-    virtual ~IScreenElement() { };
+    virtual ~IScreenElement() {};
 
     virtual void onUpdate(double elapsedTime) = 0;
 
@@ -124,7 +121,7 @@ public:
 
     virtual void VSetPosition(Vec2 position) = 0;
 
-    virtual ~ISceneNode() { };
+    virtual ~ISceneNode() {};
 };
 
 #endif //CROSSENGINEDESKTOP_INTERFACES_H

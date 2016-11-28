@@ -2,14 +2,14 @@
 // Created by Felipe Costa on 4/24/16.
 //
 
-#include "AwesomeEventListener.h"
+#include "DriftsEventListener.h"
 #include "../../engine/Actor/Base/ActorParams.h"
 #include "../../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../../engine/EventManager/Events/EvtData_New_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Request_New_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 
-AwesomeEventListener::AwesomeEventListener(AwesomeGameLogic *awesomeGameLogic) : m_AwesomeGameLogic(awesomeGameLogic) {
+AwesomeEventListener::AwesomeEventListener(DriftsGameLogic *awesomeGameLogic) : m_AwesomeGameLogic(awesomeGameLogic) {
 
 }
 
@@ -27,7 +27,6 @@ bool AwesomeEventListener::HandleEvent(IEventData const &event) {
     EventType eventType = event.VGetEventType();
 
     if (eventType == EvtData_New_Game::sk_EventType) {
-        // std::cout << "New Game Event" << std::endl;
         return true;
     } else if (eventType == EvtData_Request_New_Actor::sk_EventType) {
         const EvtData_Request_New_Actor &castEvent = static_cast< const EvtData_Request_New_Actor & >( event );

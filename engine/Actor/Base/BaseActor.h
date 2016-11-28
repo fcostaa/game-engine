@@ -13,14 +13,10 @@ class BaseActor : public IActor {
     friend class BaseGameLogic;
 
 protected:
-    ActorId m_id;
-    Vec2 position;
-
     boost::shared_ptr<ActorParams> m_Params;
+
 public:
     BaseActor(boost::shared_ptr<ActorParams> params);
-
-    virtual void VOnUpdate(int deltaMilliseconds);
 
     virtual void VSetID(ActorId id);
 

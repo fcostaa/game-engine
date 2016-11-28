@@ -77,7 +77,7 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         return false;
     }
 
-    RegisterBaseGameEvents();
+    registerBaseGameEvents();
 
     this->mGameLogic = this->createGameAndView();
     if (!this->mGameLogic) {
@@ -187,7 +187,7 @@ void GameApplication::cleanUp() {
     al_uninstall_system();
 }
 
-bool GameApplication::RegisterBaseGameEvents() {
+bool GameApplication::registerBaseGameEvents() {
     if (mEventManager == NULL) {
         return false;
     }

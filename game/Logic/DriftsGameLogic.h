@@ -8,15 +8,15 @@
 
 #include "../../engine/Logic/BaseGameLogic.h"
 
-class AwesomeGameLogic : public BaseGameLogic {
+class DriftsGameLogic : public BaseGameLogic {
 
 private:
     EventListenerPtr m_awesomeGameViewListener;
 
 public:
-    AwesomeGameLogic();
+    DriftsGameLogic();
 
-    virtual ~AwesomeGameLogic();
+    virtual ~DriftsGameLogic();
 
     virtual void VBuildInitialScene();
 };

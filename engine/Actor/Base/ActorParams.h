@@ -5,8 +5,6 @@
 #ifndef CROSSENGINEDESKTOP_ACTORPARAMS_H
 #define CROSSENGINEDESKTOP_ACTORPARAMS_H
 
-
-//#include "../../Interfaces.h"
 #include "../../Logic/BaseGameLogic.h"
 #include "../../SceneGraph/SceneNode.h"
 #include "../../Math/Vec2.h"
@@ -31,6 +29,5 @@ struct ActorParams {
 
     virtual boost::shared_ptr<ISceneNode> VCreateSceneNode(boost::shared_ptr<Scene> pScene);
 };
-
 
 #endif //CROSSENGINEDESKTOP_ACTORPARAMS_H

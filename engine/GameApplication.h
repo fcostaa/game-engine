@@ -67,7 +67,7 @@ public:
 
     virtual BaseGameLogic *createGameAndView() = 0;
 
-    virtual bool RegisterBaseGameEvents();
+    virtual bool registerBaseGameEvents();
 
     void handleEvent(ALLEGRO_EVENT event);
 };
