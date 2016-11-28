@@ -3,9 +3,9 @@ project(CrossEngineDesktop)
 
 file(COPY "${PROJECT_SOURCE_DIR}/game/assets" DESTINATION "${PROJECT_SOURCE_DIR}/build/")
 
-include_directories(/usr/local/Cellar/boost/1.58.0/include)
-INCLUDE_DIRECTORIES(/usr/local/Cellar/ttfautohint/1.4.1/include)
-INCLUDE_DIRECTORIES(/usr/local/Cellar/allegro/5.2.0/include)
+include_directories(/usr/local/Cellar/boost/1.62.0/include)
+include_directories(/usr/local/Cellar/ttfautohint/1.5.8/include)
+include_directories(/usr/local/Cellar/allegro/HEAD-42db72a/include)
 
 set(Boost_NO_SYSTEM_PATHS ON)
 set(Boost_USE_MULTITHREADED ON)
@@ -14,40 +14,12 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 set(BOOST_ALL_DYN_LINK OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-# -Wall")
-#set(CMAKE_CXX_COMPILER  "/usr/local/Cellar/gcc/5.1.0/bin/g++-5")
-
-#set(ENGINE_HEADERS engine/headers/GameApplication.h
-#                   engine/headers/Interfaces.h
-#                   engine/headers/standards.h
-#                   engine/**.cpp
-#                   engine/headers/Logic/BaseGameLogic.h
-#                   engine/headers/Logic/ProcessManager.h
-#                   engine/headers/Logic/Process.h
-#                   engine/headers/Timer/Timer.h
-#                   engine/headers/IEventManager/TypedEventData.h
-#                   engine/headers/IEventManager/IEventManager.h
-#                   )
-#set(ENGINE_SOURCES engine/src/GameApplication.cpp
-#                   engine/src/Logic/BaseGameLogic.cpp
-#                   engine/src/Logic/ProcessManager.cpp
-#                   engine/src/Logic/Process.cpp
-#                   engine/src/Timer/Timer.cpp
-#                   engine/src/IEventManager/TypedEventData.cpp
-#                   engine/src/IEventManager/IEventManager.cpp
-#
 
 AUX_SOURCE_DIRECTORY(game
         GAME_SOURCES)
 
 AUX_SOURCE_DIRECTORY(game/Events
         GAME_EVENTS_SOURCES)
-
-#AUX_SOURCE_DIRECTORY(game/Actor
-#        GAME_ACTOR_SOURCES)
-
-#AUX_SOURCE_DIRECTORY(game/SceneGraph
-#        GAME_SCENE_GRAPH_SOURCES)
 
 AUX_SOURCE_DIRECTORY(game/Logic
         GAME_LOGIC_SOURCES)
@@ -100,8 +72,6 @@ LINK_DIRECTORIES(/usr/local/Cellar/allegro/5.2.0/lib)
 add_executable(CrossEngineDesktop
         ${GAME_SOURCES}
         ${GAME_EVENTS_SOURCES}
-#        ${GAME_ACTOR_SOURCES}
-#        ${GAME_SCENE_GRAPH_SOURCES}
         ${GAME_LOGIC_SOURCES}
         ${GAME_VIEW_SOURCES}
         ${ENGINE_SOURCES}
@@ -119,7 +89,6 @@ add_executable(CrossEngineDesktop
         engine/Interfaces.h
         engine/standards.h
 )
-#${ENGINE_HEADERS} ${ENGINE_SOURCES} engine/headers/IEventManager/BaseEventData.cpp engine/headers/IEventManager/BaseEventData.h)
 
 target_link_libraries(CrossEngineDesktop ${Boost_LIBRARIES})
 target_link_libraries(CrossEngineDesktop -lallegro -lallegro_main -lallegro_image -lallegro_ttf -lallegro_font)
