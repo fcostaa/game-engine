@@ -7,11 +7,11 @@
 
 #include "Base/ActorParams.h"
 
-struct SpriteObjectParams : public ActorParams {
+struct CircleObjectParams : public ActorParams {
 
     GameViewId m_ViewId;
 
-    SpriteObjectParams();
+    CircleObjectParams();
 
     virtual boost::shared_ptr<IActor> VCreate(BaseGameLogic *logic) override;
 

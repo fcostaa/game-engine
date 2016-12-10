@@ -10,7 +10,7 @@
 #include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
-#include "../../engine/Actor/SpriteObjectParams.h"
+#include "../../engine/Actor/CircleObjectParams.h"
 
 DriftsGameViewListener::DriftsGameViewListener(DriftsHumanView *view) : m_pView(view) {
 }
@@ -30,7 +30,7 @@ bool DriftsGameViewListener::HandleEvent(IEventData const &event) {
         boost::shared_ptr<ISceneNode> node = ed.m_pActorParams->VCreateSceneNode(m_pView->m_pScene);
         m_pView->m_pScene->AddChild(ed.m_id, node);
 
-        SpriteObjectParams *p = static_cast<SpriteObjectParams *>(ed.m_pActorParams);
+        CircleObjectParams *p = static_cast<CircleObjectParams *>(ed.m_pActorParams);
 
         if (p->m_ViewId == m_pView->VGetId()) {
             m_pView->m_pPlayer = node;

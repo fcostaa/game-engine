@@ -4,7 +4,7 @@
 
 #include "AIViewListener.h"
 #include "../../engine/EventManager/Events/EvtData_New_Actor.h"
-#include "../../engine/SceneGraph/SpriteNode.h"
+#include "../../engine/SceneGraph/CircleNode.h"
 #include "AIView.h"
 #include "../../engine/EventManager/Events/EvtData_New_Game.h"
 
@@ -25,7 +25,7 @@ bool AIViewListener::HandleEvent(IEventData const &event) {
     } else if (eventType == EvtData_New_Actor::sk_EventType) {
         const EvtData_New_Actor &ed = static_cast< const EvtData_New_Actor & >( event );
 
-        SpriteObjectParams *p = static_cast<SpriteObjectParams *>(ed.m_pActorParams);
+        CircleObjectParams *p = static_cast<CircleObjectParams *>(ed.m_pActorParams);
         if (p->m_ViewId == m_pView->m_ViewId) {
             m_pView->m_PlayerActorId = p->m_Id;
         }

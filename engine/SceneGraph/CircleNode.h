@@ -8,18 +8,18 @@
 
 #include <allegro5/bitmap.h>
 #include "SceneNode.h"
-#include "../Actor/SpriteObjectParams.h"
+#include "../Actor/CircleObjectParams.h"
 
-class SpriteNode : public SceneNode {
+class CircleNode : public SceneNode {
 
 protected:
     ALLEGRO_BITMAP *m_pImage;
 
 public:
 
-    SpriteNode(SpriteObjectParams const &params, std::string name, ALLEGRO_BITMAP *image = NULL);
+    CircleNode(CircleObjectParams const &params, std::string name, ALLEGRO_BITMAP *image = NULL);
 
-    virtual ~SpriteNode();
+    virtual ~CircleNode();
 
     virtual void VRender(Scene *pScene) override;
 };

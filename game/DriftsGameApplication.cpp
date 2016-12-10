@@ -24,6 +24,10 @@ std::string *DriftsGameApplication::getGameTitle() {
 
 BaseGameLogic *DriftsGameApplication::createGameAndView() {
     BaseGameLogic *game = NEW DriftsGameLogic();
+
+    boost::shared_ptr<IGameView> playersView(new DriftsHumanView());
+    game->addGameView(playersView);
+
     return game;
 }
 
