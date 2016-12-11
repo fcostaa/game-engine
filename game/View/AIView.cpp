@@ -23,7 +23,7 @@ void AIView::onUpdate(double elapsedTime) {
 //    std::cout << "elapsedTime: " << elapsedTime << std::endl;
     if (m_PlayerActorId.valid()) {
         boost::shared_ptr<IActor> actor = gameApplication->getGameLogic()->VGetActor((*m_PlayerActorId));
-        Vec2 newPositon = Vec2(actor->VGetPosition().getX(), actor->VGetPosition().getY() + 0.5f * (float) elapsedTime);
+        Vec2 newPositon = Vec2(actor->VGetPosition().getX(), actor->VGetPosition().getY() + 20.0f * (float) elapsedTime);
         safeQueEvent(IEventDataPtr(NEW EvtData_Move_Actor(*m_PlayerActorId, newPositon)));
     }
 }
