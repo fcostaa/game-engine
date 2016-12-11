@@ -8,11 +8,13 @@
 
 #include "../../engine/Interfaces.h"
 
-class DriftsHUD : public IScreenElement{
+class DriftsHUD : public IScreenElement {
 
 protected:
-    int					m_PosX, m_PosY;
-    bool				m_bIsVisible;
+    int m_PosX, m_PosY;
+    bool m_bIsVisible;
+    int score;
+    double delta;
 
 public:
     DriftsHUD();

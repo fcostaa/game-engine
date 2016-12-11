@@ -105,13 +105,13 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
 
 void GameApplication::run() {
 
-    double elapsedTime;
-    double startTime;
-    startTime = elapsedTime = al_get_time();
+    double old_time;
+    double time;
+    double delta;
+
     bool redraw = true;
 
-    ALLEGRO_TIMEOUT timeout;
-    al_init_timeout(&timeout, 0.06);
+    old_time = time = al_get_time();
     while (mIsRunning) {
 
         if (mIsQuitting) {
@@ -124,7 +124,12 @@ void GameApplication::run() {
 
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             redraw = true;
-            this->onUpdate(elapsedTime);
+
+            time = ev.timer.timestamp;
+            delta = time - old_time;
+            old_time = time;
+
+            this->onUpdate(delta);
             safeTickEventManager(20);
         } else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             mIsQuitting = true;
@@ -139,11 +144,12 @@ void GameApplication::run() {
         if (redraw && al_is_event_queue_empty(event_queue)) {
             redraw = false;
             al_clear_to_color(al_map_rgb(255, 255, 255));
-            this->onRender(elapsedTime);
+            this->onRender(delta);
 
             al_flip_display();
 
             al_set_target_bitmap(al_get_backbuffer(window));
+            al_rest(1.0 / FPS);
         }
     }
 

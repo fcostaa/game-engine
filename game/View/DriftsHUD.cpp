@@ -5,17 +5,19 @@
 #include "DriftsHUD.h"
 #include "../../engine/standards.h"
 #include <allegro5/allegro_font.h>
-//#include "../../engine/GameApplication.cpp"
 
 extern ALLEGRO_FONT *font;
 
 void DriftsHUD::onUpdate(double elapsedTime) {
-
+    delta += elapsedTime;
+    if (delta > 1.0) {
+        score++;
+        delta = 0.0;
+    }
 }
 
 void DriftsHUD::onRender(double elapsedTime) {
-        std::cout << "elapsedTime: " << elapsedTime << std::endl;
-    al_draw_text(font, al_map_rgb(0, 0, 0), m_PosX, m_PosY, ALLEGRO_ALIGN_RIGHT, "Your Text Here!");
+    al_draw_textf(font, al_map_rgb(0, 0, 0), m_PosX, m_PosY, ALLEGRO_ALIGN_RIGHT, "Score: %i", score);
 }
 
 bool DriftsHUD::isVisible() const {
@@ -30,4 +32,6 @@ DriftsHUD::DriftsHUD() {
     m_bIsVisible = true;
     m_PosX = SCREEN_WIDTH - 8;
     m_PosY = 8;
+    score = 0;
+    delta = 0.0;
 }
