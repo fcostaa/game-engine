@@ -18,6 +18,7 @@
 #include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
 #include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
+#include "DriftsHUD.h"
 
 
 DriftsHumanView::DriftsHumanView() {
@@ -39,6 +40,10 @@ DriftsHumanView::~DriftsHumanView() {
 
 void DriftsHumanView::BuildInitialScene() {
     VPushElement(m_pScene);
+
+    boost::shared_ptr<DriftsHUD> m_HUD;
+    m_HUD.reset(NEW DriftsHUD());
+    VPushElement(m_HUD);
 }
 
 void DriftsHumanView::onUpdate(double elapsedTime) {

@@ -88,7 +88,7 @@ add_executable(CrossEngineDesktop
         engine/Utils/Optional.h
         engine/Interfaces.h
         engine/standards.h
-)
+        game/View/DriftsHUD.cpp game/View/DriftsHUD.h)
 
 target_link_libraries(CrossEngineDesktop ${Boost_LIBRARIES})
 target_link_libraries(CrossEngineDesktop -lallegro -lallegro_main -lallegro_image -lallegro_ttf -lallegro_font)

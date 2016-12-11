@@ -10,6 +10,7 @@ GameApplication *gameApplication = NULL;
 ALLEGRO_DISPLAY *window = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
+extern ALLEGRO_FONT *font = NULL;
 const int FPS = 60;
 
 GameApplication::GameApplication() :
@@ -28,10 +29,25 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         return false;
     }
 
+    al_init_image_addon();
+    al_init_font_addon(); // initialize the font addon
+    al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+
     window = al_create_display(screenWidth, screenHeight);
     if (window == NULL) {
         std::cerr << "Allegro create display failed" << std::endl;
         return false;
+    }
+
+    ALLEGRO_PATH *path = al_get_standard_path(ALLEGRO_EXENAME_PATH);
+    al_append_path_component(path, "assets");
+    al_set_path_filename(path, "pirulen.ttf");
+
+    font = al_load_ttf_font(al_path_cstr(path, '/'), 16, 0);
+    al_destroy_path(path);
+    if (!font) {
+        fprintf(stderr, "Could not load 'pirulen.ttf'.\n");
+        return -1;
     }
 
     if (!al_install_keyboard()) {
@@ -43,8 +59,6 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         std::cerr << "Allegro initialize the mouse failed" << std::endl;
         return -1;
     }
-
-    al_init_image_addon();
 
     event_queue = al_create_event_queue();
     if (event_queue == NULL) {
@@ -126,6 +140,7 @@ void GameApplication::run() {
             redraw = false;
             al_clear_to_color(al_map_rgb(255, 255, 255));
             this->onRender(elapsedTime);
+
             al_flip_display();
 
             al_set_target_bitmap(al_get_backbuffer(window));
