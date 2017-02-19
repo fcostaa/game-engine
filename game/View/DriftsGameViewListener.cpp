@@ -5,7 +5,6 @@
 #include "DriftsGameViewListener.h"
 #include "DriftsHumanView.h"
 #include "../../engine/Actor/Base/ActorParams.h"
-#include "../../engine/EventManager/Events/EvtData_New_Game.h"
 #include "../../engine/EventManager/Events/EvtData_New_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Keyboard_key_Down.h"
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
@@ -22,17 +21,14 @@ char const *DriftsGameViewListener::GetName() {
 bool DriftsGameViewListener::HandleEvent(IEventData const &event) {
     EventType eventType = event.VGetEventType();
 
-    if (eventType == EvtData_New_Game::sk_EventType) {
-        // do nothing
-    } else if (eventType == EvtData_New_Actor::sk_EventType) {
+    if (eventType == EvtData_New_Actor::sk_EventType) {
         const EvtData_New_Actor &ed = static_cast< const EvtData_New_Actor & >( event );
 
         boost::shared_ptr<ISceneNode> node = ed.m_pActorParams->VCreateSceneNode(m_pView->m_pScene);
-        m_pView->m_pScene->AddChild(ed.m_id, node);
 
         CircleObjectParams *p = static_cast<CircleObjectParams *>(ed.m_pActorParams);
 
-        if (p->m_ViewId == m_pView->VGetId()) {
+        if (p->m_Type == AT_Player) {
             m_pView->m_pPlayer = node;
             m_pView->m_pController.reset(NEW DriftsController(node));
             m_pView->m_KeyboardHandler = m_pView->m_pController;
