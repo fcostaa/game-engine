@@ -37,11 +37,19 @@ public:
 typedef unsigned int ActorId;
 struct ActorParams;
 
+enum ActorType
+{
+    AT_Circle,
+    AT_Player
+};
+
 class IActor {
 public:
     virtual ~IActor() {}
 
     virtual ActorId VGetID() = 0;
+
+    virtual const ActorType VGetType()=0;
 
     virtual Vec2 const VGetPosition() = 0;
 

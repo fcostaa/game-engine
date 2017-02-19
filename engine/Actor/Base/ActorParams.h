@@ -15,6 +15,8 @@ struct ActorParams {
 
     optional<ActorId> m_Id;
 
+    ActorType m_Type;
+
     Vec2 m_Pos;
 
     float m_Radius;

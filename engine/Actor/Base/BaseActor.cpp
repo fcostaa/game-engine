@@ -4,7 +4,7 @@
 
 #include "BaseActor.h"
 
-BaseActor::BaseActor(boost::shared_ptr<ActorParams> params) {
+BaseActor::BaseActor(ActorType actorType, boost::shared_ptr<ActorParams> params) : m_ActorType(actorType) {
     m_Params = params;
 }
 
@@ -22,6 +22,10 @@ void BaseActor::VSetPosition(Vec2 newPosition) {
 
 ActorId BaseActor::VGetID() {
     return *(m_Params->m_Id);
+}
+
+const ActorType BaseActor::VGetType() {
+    return m_ActorType;
 }
 
 boost::shared_ptr<ActorParams> BaseActor::VGetParams() {

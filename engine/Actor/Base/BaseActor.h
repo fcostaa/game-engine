@@ -14,9 +14,10 @@ class BaseActor : public IActor {
 
 protected:
     boost::shared_ptr<ActorParams> m_Params;
+    ActorType m_ActorType;
 
 public:
-    BaseActor(boost::shared_ptr<ActorParams> params);
+    BaseActor(ActorType actorType, boost::shared_ptr<ActorParams> params);
 
     virtual void VSetID(ActorId id);
 
@@ -25,6 +26,8 @@ public:
     virtual void VSetPosition(Vec2 newPosition);
 
     virtual ActorId VGetID();
+
+    virtual const ActorType VGetType() override;
 
     virtual boost::shared_ptr<ActorParams> VGetParams();
 };
