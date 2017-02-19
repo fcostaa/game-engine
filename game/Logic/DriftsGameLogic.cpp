@@ -34,19 +34,32 @@ void DriftsGameLogic::VBuildInitialScene() {
 
     CircleObjectParams playerParams;
     playerParams.m_ViewId = playersView->VGetId();
+    playerParams.m_Type = AT_Player;
     playerParams.m_Pos = Vec2(display_width - 64, display_height - 64);
     playerParams.m_Radius = 32.0f;
 
     const EvtData_Request_New_Actor testObjEvt(&playerParams);
     safeTriggerEvent(testObjEvt);
 
-    boost::shared_ptr<IGameView> gameView(NEW AIView());
-    addGameView(gameView);
+    srand((unsigned int) time(NULL));
 
-    CircleObjectParams spriteObjectParams;
-    spriteObjectParams.m_ViewId = gameView->VGetId();
-    spriteObjectParams.m_Pos = Vec2(display_width / 2, 0);
-    spriteObjectParams.m_Radius = 32.0f;
-    const EvtData_Request_New_Actor requestActor(&spriteObjectParams);
-    safeTriggerEvent(requestActor);
+    for (int i = 0; i < 7; ++i) {
+        boost::shared_ptr<IGameView> gameView(NEW AIView());
+        addGameView(gameView);
+
+        CircleObjectParams spriteObjectParams;
+        spriteObjectParams.m_ViewId = gameView->VGetId();
+        spriteObjectParams.m_Type = AT_Circle;
+
+        float radius = 32.0f;
+        float x = rand() % display_width;
+
+        x = (x + radius >= display_width) ? x - (radius + 1) : x;
+        x = (x - radius <= 0) ? x + (radius + 1) : x;
+
+        spriteObjectParams.m_Radius = radius;
+        spriteObjectParams.m_Pos = Vec2(x, radius);
+        const EvtData_Request_New_Actor requestActor(&spriteObjectParams);
+        safeTriggerEvent(requestActor);
+    }
 }
