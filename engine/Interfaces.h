@@ -65,7 +65,7 @@ public:
 
     virtual boost::shared_ptr<IActor> VGetActor(const ActorId id) = 0;
 
-    virtual void VAddActor(boost::shared_ptr<IActor> actor, struct ActorParams *p) = 0;
+    virtual void VAddActor(boost::shared_ptr<IActor> actor, optional<ActorId> actorID) = 0;
 
     virtual void VRemoveActor(ActorId id) = 0;
 

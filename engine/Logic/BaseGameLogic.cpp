@@ -3,7 +3,6 @@
 //
 
 #include "BaseGameLogic.h"
-#include "../Actor/Base/ActorParams.h"
 #include "../EventManager/Events/EvtData_New_Game.h"
 
 #import <cmath>
@@ -79,14 +78,16 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
 
                 Vec2 center1 = it->second.first;
                 float radius1 = it->second.second;
-                ActorId actorId = it->first;
+                ActorId actorIdA = it->first;
 
                 for (CollisionCircleMap::const_iterator it2 = m_CollisionCircleMap.begin(),
                              itEnd2 = m_CollisionCircleMap.end(); it2 != itEnd2; it2++) {
 
-                    if (actorId == it2->first) {
+                    ActorId actorIdB = it2->first;
+                    if (actorIdA == actorIdB) {
                         continue;
                     }
+
 
                     Vec2 center2 = it2->second.first;
                     float radius2 = it2->second.second;
@@ -96,7 +97,15 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
                     float distance = sqrtf(dx * dx + dy * dy);
 
                     if (distance < radius1 + radius2) {
-                        std::cout << ">>>>>>>>>> collision detected!" << std::endl;
+                        boost::shared_ptr<IActor> gameActorA = VGetActor(actorIdA);
+                        boost::shared_ptr<IActor> gameActorB = VGetActor(actorIdB);
+
+                        ActorType typeA = gameActorA->VGetType();
+                        ActorType typeB = gameActorB->VGetType();
+
+                        if ((typeA == AT_Circle && typeB == AT_Player)
+                            || (typeA == AT_Player && typeB == AT_Circle))
+                            std::cout << ">>>>>>>>>> collision detected!" << std::endl;
                     }
                 }
             }
@@ -121,10 +130,11 @@ void BaseGameLogic::changeState(GameState newState) {
     mState = newState;
 }
 
-void BaseGameLogic::VAddActor(boost::shared_ptr<IActor> actor, ActorParams *p) {
-    optional<ActorId> destActorID = p->m_Id;
-    m_ActorList[*destActorID] = actor;
-    actor->VSetID(*destActorID);
+void BaseGameLogic::VAddActor(boost::shared_ptr<IActor> actor, optional<ActorId> actorID) {
+    if (actorID.valid()) {
+        m_ActorList[*actorID] = actor;
+        actor->VSetID(*actorID);
+    }
 }
 
 void BaseGameLogic::VRemoveActor(ActorId id) {

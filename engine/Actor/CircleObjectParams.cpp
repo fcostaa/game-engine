@@ -13,11 +13,10 @@ CircleObjectParams::CircleObjectParams() {
 
 boost::shared_ptr<IActor> CircleObjectParams::VCreate(BaseGameLogic *logic) {
     boost::shared_ptr<IActor> actorObject(
-            new BaseActor(boost::shared_ptr<CircleObjectParams>(NEW CircleObjectParams(*this))));
-    logic->VAddActor(actorObject, this);
+            new BaseActor(m_Type, boost::shared_ptr<CircleObjectParams>(NEW CircleObjectParams(*this))));
+    logic->VAddActor(actorObject, actorObject->VGetID());
 
     logic->VAddCollisionCircle(std::make_pair(m_Pos, m_Radius), actorObject->VGetID());
-    logic->VGetActor(actorObject->VGetID())->VSetPosition(m_Pos);
     return actorObject;
 }
 

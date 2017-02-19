@@ -62,7 +62,7 @@ public:
 
     virtual void VMoveActor(const ActorId id, Vec2 position);
 
-    virtual void VAddActor(boost::shared_ptr<IActor> actor, ActorParams *p);
+    virtual void VAddActor(boost::shared_ptr<IActor> actor, optional<ActorId> actorID );
 
     virtual void VRemoveActor(ActorId id);
 
