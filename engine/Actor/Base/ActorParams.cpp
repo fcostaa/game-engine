@@ -14,7 +14,8 @@ ActorParams::~ActorParams() {
 
 ActorParams::ActorParams(const ActorParams &actorParams) {
     m_Id = actorParams.m_Id;
-    m_Pos = actorParams.m_Pos;
+    m_Position = actorParams.m_Position;
+    m_Velocity = actorParams.m_Velocity;
     m_Radius = actorParams.m_Radius;
     m_Size = sizeof(ActorParams);
 }

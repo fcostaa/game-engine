@@ -16,7 +16,7 @@ boost::shared_ptr<IActor> CircleObjectParams::VCreate(BaseGameLogic *logic) {
             new BaseActor(m_Type, boost::shared_ptr<CircleObjectParams>(NEW CircleObjectParams(*this))));
     logic->VAddActor(actorObject, actorObject->VGetID());
 
-    logic->VAddCollisionCircle(std::make_pair(m_Pos, m_Radius), actorObject->VGetID());
+    logic->VAddCollisionCircle(std::make_pair(m_Position, m_Radius), actorObject->VGetID());
     return actorObject;
 }
 

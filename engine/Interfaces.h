@@ -53,9 +53,13 @@ public:
 
     virtual Vec2 const VGetPosition() = 0;
 
+    virtual Vec2 const VGetVelocity() = 0;
+
     virtual void VSetID(ActorId id) = 0;
 
     virtual void VSetPosition(Vec2 newPosition) = 0;
+
+    virtual void VSetVelocity(Vec2 newVelocity) = 0;
 
     virtual boost::shared_ptr<ActorParams> VGetParams() = 0;
 };

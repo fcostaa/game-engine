@@ -19,6 +19,8 @@ public:
     virtual ~DriftsGameLogic();
 
     virtual void VBuildInitialScene();
+
+    virtual void onUpdate(double elapsedTime) override;
 };
 
 

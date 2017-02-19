@@ -9,14 +9,6 @@ const EventType EvtData_Request_New_Actor::sk_EventType("request_new_actor");
 EvtData_Request_New_Actor::EvtData_Request_New_Actor(const ActorParams *pCreateParams) : m_pActorParams(NULL) {
     m_pActorParams = reinterpret_cast<ActorParams *>(NEW char[pCreateParams->m_Size]);
     memcpy(m_pActorParams, pCreateParams, pCreateParams->m_Size);
-//        m_pActorParams = reinterpret_cast<ActorParams *>(NEW char[pCreateParams.m_Size]);
-//    memcpy(m_pActorParams, &pCreateParams, pCreateParams.m_Size);
-//    m_pActorParams = reinterpret_cast<ActorParams *>(&pCreateParams);
-//    m_pActorParams = (ActorParams *) malloc(sizeof(pCreateParams.m_Size));
-//    m_pActorParams = &pCreateParams;
-    //    m_pActorParams = &pCreateParams;
-
-//    m_pActorParams = const_cast<ActorParams *>(pCreateParams);
 }
 
 EvtData_Request_New_Actor::~EvtData_Request_New_Actor() {

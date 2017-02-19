@@ -17,7 +17,9 @@ struct ActorParams {
 
     ActorType m_Type;
 
-    Vec2 m_Pos;
+    Vec2 m_Position;
+
+    Vec2 m_Velocity;
 
     float m_Radius;
 

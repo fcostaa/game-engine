@@ -23,7 +23,11 @@ public:
 
     virtual Vec2 const VGetPosition();
 
+    virtual const Vec2 VGetVelocity() override;
+
     virtual void VSetPosition(Vec2 newPosition);
+
+    virtual void VSetVelocity(Vec2 newVelocity) override;
 
     virtual ActorId VGetID();
 

@@ -14,8 +14,6 @@ class AIView : public IGameView {
 protected:
     GameViewId m_ViewId;
     optional<ActorId> m_PlayerActorId;
-
-    Vec2 velocity;
 public:
 
     AIView();

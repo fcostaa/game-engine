@@ -139,7 +139,6 @@ void BaseGameLogic::VAddActor(boost::shared_ptr<IActor> actor, optional<ActorId>
 
 void BaseGameLogic::VRemoveActor(ActorId id) {
     if (NULL != VGetActor(id).get()) {
-//        m_pPhysics->VRemoveActor(aid);
         m_ActorList.erase(id);
     }
 }
