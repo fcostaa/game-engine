@@ -71,6 +71,9 @@ bool GameApplication::initInstance(int screenWidth, int screenHeight) {
         std::cerr << "Allegro timer failed" << std::endl;
         return -1;
     }
+
+    al_hide_mouse_cursor(window);
+
     al_start_timer(timer);
 
     al_register_event_source(event_queue, al_get_display_event_source(window));
