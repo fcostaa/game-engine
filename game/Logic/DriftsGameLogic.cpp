@@ -11,6 +11,7 @@
 #include "../View/AIView.h"
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 #include "../../engine/Actor/CircleObjectParams.h"
+#include "../Actor/PlayerObjectParams.h"
 
 
 DriftsGameLogic::DriftsGameLogic() : BaseGameLogic() {
@@ -32,7 +33,7 @@ void DriftsGameLogic::VBuildInitialScene() {
     int display_height = al_get_display_height(al_get_current_display());
     int display_width = al_get_display_width(al_get_current_display());
 
-    CircleObjectParams playerParams;
+    PlayerObjectParams playerParams;
     playerParams.m_ViewId = playersView->VGetId();
     playerParams.m_Type = AT_Player;
     playerParams.m_Position = Vec2(display_width - 64, display_height - 64);
@@ -77,6 +78,10 @@ void DriftsGameLogic::onUpdate(double elapsedTime) {
     BaseGameLogic::onUpdate(elapsedTime);
 
     switch (mState) {
+        case INITIALIZING:
+        case LOADINGGAME:
+            break;
+
         case RUNNING:
             for (ActorMap::iterator it = m_ActorList.begin(); it != m_ActorList.end(); ++it) {
                 boost::shared_ptr<IActor> actor = it->second;

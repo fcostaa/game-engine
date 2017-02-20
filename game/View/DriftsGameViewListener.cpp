@@ -10,6 +10,7 @@
 #include "../../engine/EventManager/Events/EvtData_Move_Actor.h"
 #include "../../engine/EventManager/Events/EvtData_Mouse_Move.h"
 #include "../../engine/Actor/CircleObjectParams.h"
+#include "../Actor/PlayerObjectParams.h"
 
 DriftsGameViewListener::DriftsGameViewListener(DriftsHumanView *view) : m_pView(view) {
 }
@@ -26,9 +27,9 @@ bool DriftsGameViewListener::HandleEvent(IEventData const &event) {
 
         boost::shared_ptr<ISceneNode> node = ed.m_pActorParams->VCreateSceneNode(m_pView->m_pScene);
 
-        CircleObjectParams *p = static_cast<CircleObjectParams *>(ed.m_pActorParams);
+        PlayerObjectParams *p = static_cast<PlayerObjectParams *>(ed.m_pActorParams);
 
-        if (p->m_Type == AT_Player) {
+        if (p->m_ViewId == m_pView->m_ViewId) {
             m_pView->m_pPlayer = node;
             m_pView->m_pController.reset(NEW DriftsController(node));
             m_pView->m_KeyboardHandler = m_pView->m_pController;
