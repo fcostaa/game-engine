@@ -25,7 +25,7 @@ typedef std::map<ActorId, boost::shared_ptr<IActor> > ActorMap;
 typedef std::map<ActorId, std::pair<Vec2, float> > CollisionCircleMap;
 
 enum GameState {
-    INITIALIZING, LOADINGGAME, RUNNING
+    INITIALIZING, LOADING_GAME, RUNNING, QUITTING
 };
 
 class BaseGameLogic : public IGameLogic {

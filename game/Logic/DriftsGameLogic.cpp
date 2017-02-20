@@ -79,7 +79,7 @@ void DriftsGameLogic::onUpdate(double elapsedTime) {
 
     switch (mState) {
         case INITIALIZING:
-        case LOADINGGAME:
+        case LOADING_GAME:
             break;
 
         case RUNNING:

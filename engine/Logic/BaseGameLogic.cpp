@@ -47,10 +47,10 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
     switch (mState) {
         case INITIALIZING:
             // If we get to here we're ready to attach players
-            this->changeState(LOADINGGAME);
+            this->changeState(LOADING_GAME);
             break;
 
-        case LOADINGGAME:
+        case LOADING_GAME:
             if (gameApplication->loadGame()) {
                 this->changeState(RUNNING);
             } else {
@@ -105,13 +105,16 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
 
                         if ((typeA == AT_Circle && typeB == AT_Player)
                             || (typeA == AT_Player && typeB == AT_Circle))
-                            std::cout << ">>>>>>>>>> collision detected!" << std::endl;
+                            changeState(QUITTING);
                     }
                 }
             }
 
             break;
 
+        case QUITTING:
+            gameApplication->abortGame();
+            break;
         default:
             std::cerr << "Unrecognized state." << std::endl;
     }

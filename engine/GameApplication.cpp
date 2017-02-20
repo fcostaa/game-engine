@@ -218,17 +218,3 @@ bool GameApplication::registerBaseGameEvents() {
 
     return true;
 }
-
-void GameApplication::handleEvent(ALLEGRO_EVENT event) {
-    if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-        mIsQuitting = true;
-    } else if (event.type == ALLEGRO_KEY_ESCAPE) {
-        mIsQuitting = true;
-    }
-//    else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
-//        safeTriggerEvent(EvtData_Keyboard_key_Down(event.keyboard.keycode));
-//    }
-    else if (event.type == ALLEGRO_EVENT_MOUSE_AXES) {
-        safeTriggerEvent(EvtData_Mouse_Move(event.mouse.x, event.mouse.y));
-    }
-}
