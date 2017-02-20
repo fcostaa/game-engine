@@ -15,23 +15,11 @@
 class IKeyboardHandler {
 public:
     virtual void VOnKeyDown(const int keyCode) = 0;
-//
-//    virtual bool VOnKeyUp(const BYTE c) = 0;
 };
 
 class IMouseHandler {
 public:
     virtual bool VOnMouseMove(const int dx, const int dy) = 0;
-
-//    virtual bool VOnMouseMove(const CPoint &mousePos) = 0;
-//
-//    virtual bool VOnLButtonDown(const CPoint &mousePos) = 0;
-//
-//    virtual bool VOnLButtonUp(const CPoint &mousePos) = 0;
-//
-//    virtual bool VOnRButtonDown(const CPoint &mousePos) = 0;
-//
-//    virtual bool VOnRButtonUp(const CPoint &mousePos) = 0;
 };
 
 typedef unsigned int ActorId;
