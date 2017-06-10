@@ -67,7 +67,7 @@ void DriftsGameLogic::VBuildInitialScene() {
         } else sinal1 = -1;
 
         sinal2 = 1;
-        spriteObjectParams.m_Velocity = Vec2(rand() % (sinal1 * 20), rand() % (sinal2 * 20));
+        spriteObjectParams.m_Velocity = Vec2(rand() % (sinal1 * 100), rand() % (sinal2 * 100));
 
         const EvtData_Request_New_Actor requestActor(&spriteObjectParams);
         safeTriggerEvent(requestActor);
