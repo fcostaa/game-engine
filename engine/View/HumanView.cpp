@@ -5,21 +5,15 @@
 #include "HumanView.h"
 
 HumanView::HumanView() {
-    mProcessManager = NEW ProcessManager();
 }
 
 HumanView::~HumanView() {
     while (!m_ScreenElements.empty()) {
         m_ScreenElements.pop_front();
     }
-
-    SAFE_DELETE(mProcessManager);
 }
 
 void HumanView::onUpdate(double elapsedTime) {
-
-    mProcessManager->updateProcesses(elapsedTime);
-
     for (ScreenElementList::iterator i = m_ScreenElements.begin(); i != m_ScreenElements.end(); ++i) {
         (*i)->onUpdate(elapsedTime);
     }

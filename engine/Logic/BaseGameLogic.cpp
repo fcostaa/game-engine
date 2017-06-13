@@ -11,7 +11,6 @@ BaseGameLogic::BaseGameLogic() :
         mGameViews(0), m_LastActorId(0) {
 
     mGameViews = NEW GameViewList();
-    mProcessManager = NEW ProcessManager();
 
     changeState(INITIALIZING);
 }
@@ -21,7 +20,6 @@ BaseGameLogic::~BaseGameLogic() {
     while (!mGameViews->empty())
         mGameViews->pop_front();
 
-    SAFE_DELETE(mProcessManager);
     SAFE_DELETE(mGameViews);
 }
 
@@ -60,8 +58,6 @@ void BaseGameLogic::onUpdate(double elapsedTime) {
             break;
 
         case RUNNING:
-            mProcessManager->updateProcesses(elapsedTime);
-
             for (CollisionCircleMap::const_iterator it = m_CollisionCircleMap.begin(),
                          itEnd = m_CollisionCircleMap.end(); it != itEnd; it++) {
                 ActorId const id = it->first;

@@ -7,14 +7,11 @@
 
 #include <boost/shared_ptr.hpp>
 #include "../Interfaces.h"
-#include "../Logic/ProcessManager.h"
 #include "../standards.h"
 
 class HumanView : public IGameView {
 
 protected:
-    ProcessManager *mProcessManager;
-
     ScreenElementList m_ScreenElements;
 
     GameViewId m_ViewId;

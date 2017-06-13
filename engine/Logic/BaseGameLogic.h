@@ -13,7 +13,6 @@
 #include "../standards.h"
 #include "../Timer/Timer.h"
 #include "../Interfaces.h"
-#include "ProcessManager.h"
 #include "../GameApplication.h"
 
 class GameApplication;
@@ -33,7 +32,6 @@ protected:
     GameState mState;
 
     GameViewList *mGameViews;
-    ProcessManager *mProcessManager;
 
     ActorMap m_ActorList;
     ActorId m_LastActorId;
